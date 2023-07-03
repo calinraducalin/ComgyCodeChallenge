@@ -19,7 +19,7 @@
 		FA70E5182A52F39600621DF4 /* MeterInstallationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */; };
 		FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5192A52F5F100621DF4 /* DataProvider.swift */; };
 		FA70E51C2A52F7D000621DF4 /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E51B2A52F7D000621DF4 /* DataClient.swift */; };
-		FA70E51E2A52F95F00621DF4 /* DataClient+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E51D2A52F95F00621DF4 /* DataClient+Test.swift */; };
+		FA70E51E2A52F95F00621DF4 /* DataClient+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E51D2A52F95F00621DF4 /* DataClient+Preview.swift */; };
 		FA70E5242A52FCC600621DF4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5232A52FCC600621DF4 /* MainViewModel.swift */; };
 		FA70E5262A53030600621DF4 /* DeviceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5252A53030600621DF4 /* DeviceListViewModel.swift */; };
 		FA70E5282A53043E00621DF4 /* DeviceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */; };
@@ -27,6 +27,7 @@
 		FA70E52D2A531CA600621DF4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52C2A531CA600621DF4 /* Logger.swift */; };
 		FA70E5302A533B5600621DF4 /* Device+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52F2A533B5600621DF4 /* Device+.swift */; };
 		FA70E5342A53509800621DF4 /* NSManagedObjectContext+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5332A53509800621DF4 /* NSManagedObjectContext+.swift */; };
+		FA70E5372A5369AD00621DF4 /* ListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5362A5369AD00621DF4 /* ListViewState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,7 @@
 		FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterInstallationError.swift; sourceTree = "<group>"; };
 		FA70E5192A52F5F100621DF4 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		FA70E51B2A52F7D000621DF4 /* DataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
-		FA70E51D2A52F95F00621DF4 /* DataClient+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataClient+Test.swift"; sourceTree = "<group>"; };
+		FA70E51D2A52F95F00621DF4 /* DataClient+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataClient+Preview.swift"; sourceTree = "<group>"; };
 		FA70E5232A52FCC600621DF4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FA70E5252A53030600621DF4 /* DeviceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModel.swift; sourceTree = "<group>"; };
 		FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataProvider.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		FA70E52C2A531CA600621DF4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FA70E52F2A533B5600621DF4 /* Device+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+.swift"; sourceTree = "<group>"; };
 		FA70E5332A53509800621DF4 /* NSManagedObjectContext+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+.swift"; sourceTree = "<group>"; };
+		FA70E5362A5369AD00621DF4 /* ListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				FA70E5112A52E9F600621DF4 /* Main */,
 				FA70E5122A52EA1200621DF4 /* DeviceListView */,
 				FA70E5132A52EA3B00621DF4 /* Sync */,
+				FA70E5352A53699D00621DF4 /* Utils */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				FA70E51B2A52F7D000621DF4 /* DataClient.swift */,
-				FA70E51D2A52F95F00621DF4 /* DataClient+Test.swift */,
+				FA70E51D2A52F95F00621DF4 /* DataClient+Preview.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -231,6 +234,14 @@
 				FA70E5332A53509800621DF4 /* NSManagedObjectContext+.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		FA70E5352A53699D00621DF4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FA70E5362A5369AD00621DF4 /* ListViewState.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,7 +322,7 @@
 				825A81D02A41BCBE0031BD66 /* MainView.swift in Sources */,
 				FA70E52B2A530D0C00621DF4 /* DeviceResponse.swift in Sources */,
 				825A81CD2A407EF50031BD66 /* MeterInstallationApp.swift in Sources */,
-				FA70E51E2A52F95F00621DF4 /* DataClient+Test.swift in Sources */,
+				FA70E51E2A52F95F00621DF4 /* DataClient+Preview.swift in Sources */,
 				825A81C82A4064EB0031BD66 /* URLSession.swift in Sources */,
 				FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */,
 				825A81D22A41BE680031BD66 /* DeviceListView.swift in Sources */,
@@ -320,6 +331,7 @@
 				FA70E50E2A52E94500621DF4 /* MeterInstallation.xcdatamodeld in Sources */,
 				FA70E5342A53509800621DF4 /* NSManagedObjectContext+.swift in Sources */,
 				FA70E5242A52FCC600621DF4 /* MainViewModel.swift in Sources */,
+				FA70E5372A5369AD00621DF4 /* ListViewState.swift in Sources */,
 				FA70E5282A53043E00621DF4 /* DeviceDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

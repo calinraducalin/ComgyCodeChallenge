@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 final class MainViewModel: ObservableObject {
-    let dataProvider: DataProviding
+    let dataProvider: DataProvider
 
-    init(dataProvider: DataProviding = DataProvider.shared) {
+    init(dataProvider: DataProvider = .shared) {
         self.dataProvider = dataProvider
     }
 

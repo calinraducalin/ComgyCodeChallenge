@@ -14,7 +14,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                DeviceListView()
+                DeviceListView(viewModel: .init(dataProvider: viewModel.dataProvider))
             }
             .tabItem {
                 Label("Devices",
@@ -32,9 +32,11 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let viewModel = MainViewModel(dataProvider: DataProvider.test)
+    static let viewModel = MainViewModel(dataProvider: DataProvider.preview)
 
     static var previews: some View {
         MainView(viewModel: viewModel)
+            .environment(\.managedObjectContext,
+                          DataProvider.preview.container.viewContext)
     }
 }

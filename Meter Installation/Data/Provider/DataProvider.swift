@@ -50,7 +50,7 @@ final class DataProvider: DataProviding {
 
     var viewContext: NSManagedObjectContext { container.viewContext }
 
-    private init(inMemory: Bool = true, client: DataClient = URLSession.comgy) {
+    private init(inMemory: Bool = false, client: DataClient = URLSession.comgy) {
         self.inMemory = inMemory
         self.client = client
     }
@@ -63,9 +63,9 @@ final class DataProvider: DataProviding {
 
 }
 
-// - Test
+// - Preview
 
 extension DataProvider {
-    static let test = DataProvider(inMemory: true, client: TestClient())
+    static let preview = DataProvider(inMemory: true, client: PreviewClient())
 }
 

@@ -14,6 +14,7 @@ struct MeterInstallationApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environment(\.managedObjectContext, DataProvider.shared.viewContext)
         }
     }
     

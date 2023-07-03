@@ -9,11 +9,12 @@ import Foundation
 import SwiftUI
 
 struct MainView: View {
-    
+    @StateObject var viewModel = MainViewModel()
+
     var body: some View {
         TabView {
             NavigationStack {
-                DeviceOverview()
+                DeviceListView()
             }
             .tabItem {
                 Label("Devices",
@@ -31,7 +32,9 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
+    static let viewModel = MainViewModel(dataProvider: DataProvider.test)
+
     static var previews: some View {
-        MainView()
+        MainView(viewModel: viewModel)
     }
 }

@@ -28,6 +28,7 @@
 		FA70E5302A533B5600621DF4 /* Device+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52F2A533B5600621DF4 /* Device+.swift */; };
 		FA70E5342A53509800621DF4 /* NSManagedObjectContext+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5332A53509800621DF4 /* NSManagedObjectContext+.swift */; };
 		FA70E5372A5369AD00621DF4 /* ListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5362A5369AD00621DF4 /* ListViewState.swift */; };
+		FA70E5392A537A6F00621DF4 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5382A537A6F00621DF4 /* ListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		FA70E52F2A533B5600621DF4 /* Device+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+.swift"; sourceTree = "<group>"; };
 		FA70E5332A53509800621DF4 /* NSManagedObjectContext+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+.swift"; sourceTree = "<group>"; };
 		FA70E5362A5369AD00621DF4 /* ListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewState.swift; sourceTree = "<group>"; };
+		FA70E5382A537A6F00621DF4 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				FA70E5362A5369AD00621DF4 /* ListViewState.swift */,
+				FA70E5382A537A6F00621DF4 /* ListItemView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				FA70E51E2A52F95F00621DF4 /* DataClient+Preview.swift in Sources */,
 				825A81C82A4064EB0031BD66 /* URLSession.swift in Sources */,
 				FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */,
+				FA70E5392A537A6F00621DF4 /* ListItemView.swift in Sources */,
 				825A81D22A41BE680031BD66 /* DeviceListView.swift in Sources */,
 				FA70E52D2A531CA600621DF4 /* Logger.swift in Sources */,
 				FA70E51C2A52F7D000621DF4 /* DataClient.swift in Sources */,

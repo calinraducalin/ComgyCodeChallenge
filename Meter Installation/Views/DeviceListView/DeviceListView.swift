@@ -10,35 +10,27 @@ import SwiftUI
 
 struct DeviceListView: View {
     @StateObject var viewModel = DeviceListViewModel()
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.id),
-    ], animation: .default) var devices: FetchedResults<Device>
     
     var body: some View {
-        List {
-            DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices)
-            DeviceSectionView(title: "Installed Devices", devices: installedDevices)
-        }
-        .listStyle(.sidebar)
-        .toolbar {
-            ToolbarContentView(state: viewModel.state) {
-                Task {
+        NavigationStack {
+            FilteredListView(filter: viewModel.searchText)
+                .toolbar {
+                    ToolbarContentView(state: viewModel.state) {
+                        Task {
+                            await viewModel.updateDevices()
+                        }
+                    }
+                }
+                .navigationTitle("Devices")
+                .refreshable {
                     await viewModel.updateDevices()
                 }
-            }
+                .task {
+                    await viewModel.updateDevicesIfNeeded()
+                }
         }
-        .navigationTitle("Devices")
-        .refreshable {
-            await viewModel.updateDevices()
-        }
-        .task {
-            await viewModel.updateDevicesIfNeeded()
-        }
+        .searchable(text: $viewModel.searchText)
     }
-
-    private var installedDevices: [Device] { devices.filter{ $0.isInstalled }}
-
-    private var uninstalledDevices: [Device] { devices.filter{ !$0.isInstalled }}
 
 }
 
@@ -51,6 +43,37 @@ struct DeviceListView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext,
                               DataProvider.preview.container.viewContext)
         }
+    }
+}
+
+private struct FilteredListView: View {
+    @FetchRequest var devices: FetchedResults<Device>
+
+    init(filter: String) {
+        _devices = FetchRequest<Device>(sortDescriptors: [SortDescriptor(\.id)], predicate: Self.makePredicate(filter: filter))
+    }
+
+    var body: some View {
+        List {
+            DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices)
+            DeviceSectionView(title: "Installed Devices", devices: installedDevices)
+        }
+        .listStyle(.sidebar)
+    }
+
+    private var installedDevices: [Device] { devices.filter{ $0.isInstalled }}
+
+    private var uninstalledDevices: [Device] { devices.filter{ !$0.isInstalled }}
+
+    private static func makePredicate(filter: String) -> NSPredicate? {
+        guard !filter.isEmpty else { return nil }
+
+        func makeTextPredicate(propertyName: String, value: String) -> NSPredicate {
+            NSPredicate(format: "%K BEGINSWITH[c] %@", propertyName, value)
+        }
+        let idPredicate = makeTextPredicate(propertyName: "id", value: filter)
+        let meterPointPredicate = makeTextPredicate(propertyName: "meterPointDescription", value: filter)
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [idPredicate, meterPointPredicate])
     }
 }
 
@@ -69,28 +92,6 @@ private struct DeviceSectionView: View {
     }
 }
 
-private struct ListItemView: View {
-    let device: Device
-
-    var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: device.deviceType.systemImageName)
-                .renderingMode(.template)
-                .foregroundColor(device.deviceType.imageColor)
-            VStack(alignment: .leading) {
-                Text(device.identifier)
-                Text(device.meterPointText)
-            }
-            Spacer()
-            Image(systemName: device.status.systemImageName)
-                .renderingMode(.template)
-                .imageScale(.small)
-                .foregroundColor(device.status.imageColor)
-
-        }
-    }
-}
-
 private struct ToolbarContentView: View {
     let state: ListViewState
     let refreshAction: () -> Void
@@ -104,4 +105,3 @@ private struct ToolbarContentView: View {
 
     private var title: String { state == .syncing ? "Refreshing..." : "Refresh" }
 }
-

@@ -11,6 +11,7 @@ import Foundation
 final class DeviceListViewModel: ObservableObject {
     let dataProvider: DeviceDataProviding
     @Published private(set) var state: ListViewState = .synced
+    @Published var searchText: String = ""
 
     private var lastUpdated: Date?
 

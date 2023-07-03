@@ -13,19 +13,15 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            NavigationStack {
-                DeviceListView(viewModel: .init(dataProvider: viewModel.dataProvider))
-            }
-            .tabItem {
-                Label("Devices",
-                      systemImage: "screwdriver")
-            }
-            NavigationStack {
-                SyncView()
-            }
-            .tabItem {
-                Label("Sync", systemImage: "arrow.2.circlepath")
-            }
+            DeviceListView(viewModel: .init(dataProvider: viewModel.dataProvider))
+                .tabItem {
+                    Label("Devices",
+                          systemImage: "screwdriver")
+                }
+            SyncView()
+                .tabItem {
+                    Label("Sync", systemImage: "arrow.2.circlepath")
+                }
         }
     }
     

@@ -11,14 +11,16 @@ import SwiftUI
 struct SyncView: View {
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Your Task")
-                .font(.title)
-            Text("Display all devices that are marked to sync with the server and add a button that triggers the sync.")
-                .foregroundStyle(.secondary)
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Text("Your Task")
+                    .font(.title)
+                Text("Display all devices that are marked to sync with the server and add a button that triggers the sync.")
+                    .foregroundStyle(.secondary)
+            }
+            .padding()
+            .navigationTitle("Sync")
         }
-        .padding()
-        .navigationTitle("Sync")
     }
     
 }

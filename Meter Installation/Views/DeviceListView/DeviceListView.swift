@@ -13,21 +13,23 @@ struct DeviceListView: View {
     
     var body: some View {
         NavigationStack {
-            FilteredListView(filter: viewModel.searchText)
-                .toolbar {
-                    ToolbarContentView(state: viewModel.state) {
-                        Task {
-                            await viewModel.updateDevices()
-                        }
+            Group {
+                FilteredListView(filter: viewModel.searchText, state: viewModel.state)
+            }
+            .toolbar {
+                ToolbarContentView(state: viewModel.state) {
+                    Task {
+                        await viewModel.updateDevices()
                     }
                 }
-                .navigationTitle("Devices")
-                .refreshable {
-                    await viewModel.updateDevices()
-                }
-                .task {
-                    await viewModel.updateDevicesIfNeeded()
-                }
+            }
+            .navigationTitle("Devices")
+            .refreshable {
+                await viewModel.updateDevices()
+            }
+            .task {
+                await viewModel.updateDevicesIfNeeded()
+            }
         }
         .searchable(text: $viewModel.searchText)
     }
@@ -38,57 +40,66 @@ struct DeviceListView_Previews: PreviewProvider {
     static let viewModel = DeviceListViewModel(dataProvider: DataProvider.preview)
     
     static var previews: some View {
-        NavigationStack {
-            DeviceListView(viewModel: viewModel)
-                .environment(\.managedObjectContext,
-                              DataProvider.preview.container.viewContext)
-        }
+        DeviceListView(viewModel: viewModel)
+            .environment(\.managedObjectContext,
+                          DataProvider.preview.container.viewContext)
     }
 }
 
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
+    let state: ListViewState
 
-    init(filter: String) {
+    init(filter: String, state: ListViewState) {
         _devices = FetchRequest<Device>(sortDescriptors: [SortDescriptor(\.id)], predicate: Self.makePredicate(filter: filter))
+        self.state = state
     }
 
     var body: some View {
-        List {
-            DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices)
-            DeviceSectionView(title: "Installed Devices", devices: installedDevices)
+        Group {
+            if devices.isEmpty {
+                let (title, subtitle) = makeEmptyViewTexts(state: state)
+                EmptyView(title: title, subtitle: subtitle)
+            } else {
+                List {
+                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices)
+                    DeviceSectionView(title: "Installed Devices", devices: installedDevices)
+                }
+                .listStyle(.sidebar)
+            }
         }
-        .listStyle(.sidebar)
     }
 
     private var installedDevices: [Device] { devices.filter{ $0.isInstalled }}
 
     private var uninstalledDevices: [Device] { devices.filter{ !$0.isInstalled }}
 
-    private static func makePredicate(filter: String) -> NSPredicate? {
-        guard !filter.isEmpty else { return nil }
+    private static func makePredicate(filter: String) -> NSPredicate {
+        let syncedPredicate = PredicateMaker.makeSyncedPredicate(synced: true)
 
-        func makeTextPredicate(propertyName: String, value: String) -> NSPredicate {
-            NSPredicate(format: "%K BEGINSWITH[c] %@", propertyName, value)
-        }
-        let idPredicate = makeTextPredicate(propertyName: "id", value: filter)
-        let meterPointPredicate = makeTextPredicate(propertyName: "meterPointDescription", value: filter)
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [idPredicate, meterPointPredicate])
+        guard !filter.isEmpty else { return syncedPredicate }
+
+        let idPredicate = PredicateMaker.makeTextPredicate(propertyName: "id", value: filter)
+        let meterPointPredicate = PredicateMaker.makeTextPredicate(propertyName: "meterPointDescription", value: filter)
+        let filterPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [idPredicate, meterPointPredicate])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [syncedPredicate, filterPredicate])
     }
-}
 
-private struct DeviceSectionView: View {
-    let title: String
-    let devices: [Device]
-
-    var body: some View {
-        Group {
-            if !devices.isEmpty {
-                Section("\(title) (\(devices.count))") {
-                    ForEach(devices, content: ListItemView.init)
-                }
-            }
+    private func makeEmptyViewTexts(state: ListViewState) -> (title: String, subtitle: String) {
+        let title: String
+        let subtitle: String
+        switch state {
+        case .success:
+            title = "Have a beer! 🍻"
+            subtitle = "There is no device to show."
+        case .loading:
+            title = "Loading devices... 👀"
+            subtitle = "Please wait until your items are shown."
+        case .failed:
+            title = "Oups... 🙈"
+            subtitle = "Something went wrong while loading your devices."
         }
+        return (title, subtitle)
     }
 }
 
@@ -99,9 +110,9 @@ private struct ToolbarContentView: View {
     var body: some View {
         HStack(spacing: 8) {
             Button(title, action: refreshAction)
-                .disabled(state == .syncing)
+                .disabled(state == .loading)
         }
     }
 
-    private var title: String { state == .syncing ? "Refreshing..." : "Refresh" }
+    private var title: String { state == .loading ? "Refreshing..." : "Refresh" }
 }

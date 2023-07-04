@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 final class DeviceListViewModel: ObservableObject {
     let dataProvider: DeviceDataProviding
-    @Published private(set) var state: ListViewState = .synced
+    @Published private(set) var state: ListViewState = .success
     @Published var searchText: String = ""
 
     private var lastUpdated: Date?
@@ -31,11 +31,11 @@ final class DeviceListViewModel: ObservableObject {
     }
 
     func updateDevices() async {
-        state = .syncing
+        state = .loading
         do {
             try await dataProvider.fetchDevices()
             lastUpdated = .now
-            state = .synced
+            state = .success
         } catch {
             let error = error as? MeterInstallationError ?? MeterInstallationError.unkownError(error)
             print(error.localizedDescription)

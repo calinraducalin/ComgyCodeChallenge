@@ -18,7 +18,7 @@ struct MainView: View {
                     Label("Devices",
                           systemImage: "screwdriver")
                 }
-            SyncView()
+            SyncView(viewModel: .init(dataProvider: viewModel.dataProvider))
                 .tabItem {
                     Label("Sync", systemImage: "arrow.2.circlepath")
                 }

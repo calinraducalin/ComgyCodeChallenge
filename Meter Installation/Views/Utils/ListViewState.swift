@@ -8,7 +8,7 @@
 import Foundation
 
 enum ListViewState {
-    case synced
-    case syncing
+    case success
+    case loading
     case failed
 }

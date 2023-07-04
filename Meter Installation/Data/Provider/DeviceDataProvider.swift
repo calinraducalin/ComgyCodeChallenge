@@ -9,7 +9,6 @@ import CoreData
 
 protocol DeviceDataProviding: DataProviding {
     func fetchDevices() async throws
-
 }
 
 extension DataProvider: DeviceDataProviding {
@@ -37,11 +36,13 @@ private extension DataProvider {
 
         let validDevices = devices.filter { $0.isValid }
         validDevices.forEach { remoteDevice in
-            let device = Device(context: taskContext)
-            device.id = remoteDevice.id
+            let device = Device.entity(with: remoteDevice.id, in: taskContext)
             device.type = remoteDevice.type
             device.meterPointDescription = remoteDevice.meterPointDescription
-            device.installationDate = remoteDevice.installationDate
+            // update installation date only if needed
+            if device.synced || !device.synced && remoteDevice.installationDate != nil {
+                device.installationDate = remoteDevice.installationDate
+            }
         }
 
         if validDevices.count != devices.count {

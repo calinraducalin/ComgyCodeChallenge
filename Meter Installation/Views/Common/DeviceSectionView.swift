@@ -11,12 +11,15 @@ import SwiftUI
 struct DeviceSectionView: View {
     let title: String
     let devices: [Device]
+    let swipeAction: (_ device: Device) -> Void
 
     var body: some View {
         Group {
             if !devices.isEmpty {
                 Section("\(title) (\(devices.count))") {
-                    ForEach(devices, content: ListItemView.init)
+                    ForEach(devices) {
+                        ListItemView(device: $0, swipeAction: swipeAction)
+                    }
                 }
             }
         }
@@ -37,7 +40,7 @@ struct DeviceSectionView_Previews: PreviewProvider {
         device1.meterPointDescription = "Hallway"
         device1.type = "cold_water"
 
-        return DeviceSectionView(title: "Installed devices", devices: [device0, device1])
+        return DeviceSectionView(title: "Installed devices", devices: [device0, device1]) { _ in }
 
     }
 }

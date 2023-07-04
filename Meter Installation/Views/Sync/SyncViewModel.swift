@@ -9,10 +9,15 @@ import Foundation
 
 @MainActor
 final class SyncViewModel: ObservableObject {
-    let dataProvider: DeviceDataProviding
+    let dataProvider: DeviceManagementDataProviding
     @Published private(set) var state: ListViewState = .success
     
-    init(dataProvider: DeviceDataProviding = DataProvider.shared) {
+    init(dataProvider: DeviceManagementDataProviding = DataProvider.shared) {
         self.dataProvider = dataProvider
+    }
+
+    func swipeAction(device: Device) {
+        guard !device.synced else { return }
+        dataProvider.updateDevice(device, isInstalled: false)
     }
 }

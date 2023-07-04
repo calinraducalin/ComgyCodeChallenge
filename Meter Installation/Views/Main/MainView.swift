@@ -33,6 +33,6 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(viewModel: viewModel)
             .environment(\.managedObjectContext,
-                          DataProvider.preview.container.viewContext)
+                          DataProvider.preview.viewContext)
     }
 }

@@ -23,18 +23,28 @@ struct SyncView: View {
                     EmptyView(title: "Good job! 🙌", subtitle: "All the items are synced.")
                 } else {
                     List {
-                        DeviceSectionView(title: "Unsynced Devices", devices: devices.map { $0 })
+                        DeviceSectionView(
+                            title: "Unsynced Devices",
+                            devices: devices.map { $0 },
+                            swipeAction: { device in
+                                withAnimation {
+                                    viewModel.swipeAction(device: device)
+                                }
+                            }
+                        )
                     }
                 }
             }
             .navigationTitle("Sync")
             .toolbar {
-                ToolbarContentView(state: viewModel.state) {
+                ToolbarContentView(state: viewModel.state, devices: deviceList) {
 
                 }
             }
         }
     }
+
+    private var deviceList: [Device] { devices.map { $0} }
     
 }
 
@@ -61,7 +71,7 @@ struct SyncView_Previews: PreviewProvider {
         return NavigationStack {
             SyncView(viewModel: viewModel)
                 .environment(\.managedObjectContext,
-                              DataProvider.preview.container.viewContext)
+                              DataProvider.preview.viewContext)
         }
 
     }
@@ -69,12 +79,15 @@ struct SyncView_Previews: PreviewProvider {
 
 private struct ToolbarContentView: View {
     let state: ListViewState
+    let devices: [Device]
     let syncAction: () -> Void
 
     var body: some View {
-        HStack(spacing: 8) {
-            Button(title, action: syncAction)
-                .disabled(state == .loading)
+        HStack {
+            if !devices.isEmpty {
+                Button(title, action: syncAction)
+                    .disabled(state == .loading)
+            }
         }
     }
 

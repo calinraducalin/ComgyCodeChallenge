@@ -5,6 +5,7 @@
 //  Created by Radu Calin Calin on 03.07.2023.
 //
 
+import CoreData
 import SwiftUI
 
 extension Device {
@@ -15,6 +16,39 @@ extension Device {
     var status: DeviceStatus {
         guard synced else { return .unsynced }
         return isInstalled ? .installed : .uninstalled
+    }
+}
+
+extension Device {
+
+    class func entity(with id: String, in context: NSManagedObjectContext) -> Device {
+        let entity: Device
+        let predicate = PredicateMaker.makeIDPredicate(id: id)
+        if let existingEntity = findFirst(predicate: predicate, in: context) {
+            entity = existingEntity
+        } else {
+            entity = Device(context: context)
+            entity.id = id
+        }
+        return entity
+    }
+
+    class func findFirst(with id: String, in context: NSManagedObjectContext) -> Self? {
+        let predicate = PredicateMaker.makeIDPredicate(id: id)
+        return findFirst(predicate: predicate, in: context)
+    }
+
+    func entity(in context: NSManagedObjectContext) -> Self {
+        let entity: Self
+
+        if let existingEntity = try? context.existingObject(with: objectID) as? Self {
+            entity = existingEntity
+        } else {
+            print("Could not find \(self) in context \(context)")
+            entity = .init(context: context)
+        }
+
+        return entity
     }
 }
 

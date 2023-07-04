@@ -14,6 +14,7 @@ protocol DataProviding: AnyObject {
     var viewContext: NSManagedObjectContext { get }
 
     func makeNewTaskContext() -> NSManagedObjectContext
+    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async
 }
 
 final class DataProvider: DataProviding {
@@ -23,7 +24,7 @@ final class DataProvider: DataProviding {
     var logger: Logger { AppLogger.data }
     private let inMemory: Bool
 
-    lazy private(set) var container: NSPersistentContainer = {
+    lazy private var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MeterInstallation")
 
         guard let description = container.persistentStoreDescriptions.first else {
@@ -56,9 +57,17 @@ final class DataProvider: DataProviding {
     }
 
     func makeNewTaskContext() -> NSManagedObjectContext {
-        let taskContext = container.newBackgroundContext()
-        taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        return taskContext
+        container.newBackgroundContext()
+    }
+
+    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async {
+        await withCheckedContinuation { continuanion in
+            container.performBackgroundTask { context in
+                task(context)
+                context.saveIfNeeded()
+                continuanion.resume()
+            }
+        }
     }
 
 }

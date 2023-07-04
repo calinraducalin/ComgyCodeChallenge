@@ -14,4 +14,7 @@ struct PredicateMaker {
     static func makeSyncedPredicate(synced: Bool) -> NSPredicate {
         NSPredicate(format: "%K == %@", "synced", NSNumber(value: synced))
     }
+    static func makeIDPredicate(id: String) -> NSPredicate {
+        NSPredicate(format: "%K == %@", "id", id)
+    }
 }

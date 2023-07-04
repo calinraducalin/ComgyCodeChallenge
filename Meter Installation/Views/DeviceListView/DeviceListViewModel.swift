@@ -9,13 +9,15 @@ import Foundation
 
 @MainActor
 final class DeviceListViewModel: ObservableObject {
-    let dataProvider: DeviceDataProviding
+    typealias DevicesDataProviding = DeviceDataProviding & DeviceManagementDataProviding
+
+    let dataProvider: DevicesDataProviding
     @Published private(set) var state: ListViewState = .success
     @Published var searchText: String = ""
 
     private var lastUpdated: Date?
 
-    init(dataProvider: DeviceDataProviding = DataProvider.shared) {
+    init(dataProvider: DevicesDataProviding = DataProvider.shared) {
         self.dataProvider = dataProvider
     }
 
@@ -41,5 +43,10 @@ final class DeviceListViewModel: ObservableObject {
             print(error.localizedDescription)
             state = .failed
         }
+    }
+
+    func swipeAction(device: Device) {
+        guard !device.isInstalled else { return }
+        dataProvider.updateDevice(device, isInstalled: true)
     }
 }

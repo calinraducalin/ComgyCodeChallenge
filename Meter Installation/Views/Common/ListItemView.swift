@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     let device: Device
+    let swipeAction: (_ device: Device) -> Void
 
     var body: some View {
         HStack(spacing: 8) {
@@ -26,6 +27,29 @@ struct ListItemView: View {
                 .foregroundColor(device.status.imageColor)
 
         }
+        .swipeActions {
+            Group {
+                if isSwipeEnabled {
+                    Button(swipeButtonTitle) {
+                        swipeAction(device)
+                    }
+                    .tint(swipeButtonColor)
+                }
+            }
+        }
+    }
+
+    private var isSwipeEnabled: Bool {
+        guard device.isInstalled, device.synced else { return true }
+        return false
+    }
+
+    private var swipeButtonTitle: String {
+        device.isInstalled ? "Uninstall" : "Install"
+    }
+
+    private var swipeButtonColor: Color {
+        device.isInstalled ? .red : .green
     }
 }
 
@@ -36,6 +60,6 @@ struct ListItemView_Previews: PreviewProvider {
         device.installationDate = Date()
         device.meterPointDescription = "Kitchen"
         device.type = "warm_water"
-        return ListItemView(device: device)
+        return ListItemView(device: device) { _ in }
     }
 }

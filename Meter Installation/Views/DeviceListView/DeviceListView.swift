@@ -14,7 +14,15 @@ struct DeviceListView: View {
     var body: some View {
         NavigationStack {
             Group {
-                FilteredListView(filter: viewModel.searchText, state: viewModel.state)
+                FilteredListView(
+                    filter: viewModel.searchText,
+                    state: viewModel.state,
+                    swipeAction: { device in
+                        withAnimation {
+                            viewModel.swipeAction(device: device)
+                        }
+                    }
+                )
             }
             .toolbar {
                 ToolbarContentView(state: viewModel.state) {
@@ -42,17 +50,22 @@ struct DeviceListView_Previews: PreviewProvider {
     static var previews: some View {
         DeviceListView(viewModel: viewModel)
             .environment(\.managedObjectContext,
-                          DataProvider.preview.container.viewContext)
+                          DataProvider.preview.viewContext)
     }
 }
 
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
     let state: ListViewState
+    let swipeAction: (_ device: Device) -> Void
 
-    init(filter: String, state: ListViewState) {
-        _devices = FetchRequest<Device>(sortDescriptors: [SortDescriptor(\.id)], predicate: Self.makePredicate(filter: filter))
+    init(filter: String, state: ListViewState, swipeAction: @escaping (_ device: Device) -> Void) {
+        _devices = FetchRequest<Device>(
+            sortDescriptors: [SortDescriptor(\.id)],
+            predicate: Self.makePredicate(filter: filter)
+        )
         self.state = state
+        self.swipeAction = swipeAction
     }
 
     var body: some View {
@@ -62,8 +75,8 @@ private struct FilteredListView: View {
                 EmptyView(title: title, subtitle: subtitle)
             } else {
                 List {
-                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices)
-                    DeviceSectionView(title: "Installed Devices", devices: installedDevices)
+                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices, swipeAction: swipeAction)
+                    DeviceSectionView(title: "Installed Devices", devices: installedDevices, swipeAction: swipeAction)
                 }
                 .listStyle(.sidebar)
             }
@@ -108,7 +121,7 @@ private struct ToolbarContentView: View {
     let refreshAction: () -> Void
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack {
             Button(title, action: refreshAction)
                 .disabled(state == .loading)
         }

@@ -44,7 +44,7 @@ extension Device {
         if let existingEntity = try? context.existingObject(with: objectID) as? Self {
             entity = existingEntity
         } else {
-            print("Could not find \(self) in context \(context)")
+            AppLogger.data.error("Could not find \(self) in context \(context)")
             entity = .init(context: context)
         }
 

@@ -20,32 +20,47 @@ struct SyncView: View {
         NavigationStack {
             Group {
                 if devices.isEmpty {
-                    EmptyView(title: "Good job! 🙌", subtitle: "All the items are synced.")
+                    EmptyView(title: "All good! 🙌", subtitle: "All the devices are synced.")
                 } else {
                     List {
                         DeviceSectionView(
                             title: "Unsynced Devices",
                             devices: devices.map { $0 },
-                            swipeAction: { device in
-                                withAnimation {
-                                    viewModel.swipeAction(device: device)
-                                }
-                            }
+                            swipeAction: { viewModel.deletingDevice = $0}
                         )
                     }
                 }
             }
-            .navigationTitle("Sync")
+            .actionSheet(item: $viewModel.deletingDevice) { device in
+                ActionSheet(
+                    title: Text("Uninstall \(device.identifier)"),
+                    message: Text("Are you sure you want to uninstall this device?"),
+                    buttons: [
+                        .destructive(Text("Uninstall")) {
+                            deleteAction(device: device)
+                        },
+                        .cancel()
+                    ]
+                )
+            }
             .toolbar {
                 ToolbarContentView(state: viewModel.state, devices: deviceList) {
 
                 }
             }
+            .navigationTitle("Sync")
         }
+        .badge(devices.count)
     }
 
     private var deviceList: [Device] { devices.map { $0} }
-    
+
+    private func deleteAction(device: Device) {
+        withAnimation {
+            viewModel.swipeAction(device: device)
+        }
+    }
+
 }
 
 struct SyncView_Previews: PreviewProvider {

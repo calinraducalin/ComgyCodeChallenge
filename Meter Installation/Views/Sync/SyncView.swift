@@ -33,8 +33,13 @@ struct SyncView: View {
             }
             .toolbar {
                 ToolbarContentView(state: viewModel.state, devices: deviceList) {
-
+                    Task {
+                        await viewModel.syncDevices(deviceList)
+                    }
                 }
+            }
+            .refreshable {
+                await viewModel.syncDevices(deviceList)
             }
             .navigationTitle("Sync")
         }

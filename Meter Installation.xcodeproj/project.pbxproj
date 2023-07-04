@@ -36,6 +36,8 @@
 		FA70E5462A540D2400621DF4 /* DeviceManagementDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5452A540D2400621DF4 /* DeviceManagementDataProvider.swift */; };
 		FA70E54A2A54258B00621DF4 /* NSManageObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5492A54258B00621DF4 /* NSManageObject+.swift */; };
 		FA70E54D2A54393100621DF4 /* DeviceDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E54C2A54393100621DF4 /* DeviceDetailsView.swift */; };
+		FA70E54F2A54580E00621DF4 /* DeviceSyncProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */; };
+		FA70E5522A545FDE00621DF4 /* DevicePatchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5512A545FDE00621DF4 /* DevicePatchInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		FA70E5452A540D2400621DF4 /* DeviceManagementDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManagementDataProvider.swift; sourceTree = "<group>"; };
 		FA70E5492A54258B00621DF4 /* NSManageObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManageObject+.swift"; sourceTree = "<group>"; };
 		FA70E54C2A54393100621DF4 /* DeviceDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailsView.swift; sourceTree = "<group>"; };
+		FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSyncProvider.swift; sourceTree = "<group>"; };
+		FA70E5512A545FDE00621DF4 /* DevicePatchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePatchInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,7 @@
 			children = (
 				FA70E5202A52FA5500621DF4 /* Provider */,
 				FA70E51F2A52FA0800621DF4 /* Client */,
+				FA70E5502A545FD200621DF4 /* Request */,
 				FA70E5292A530C4300621DF4 /* Response */,
 				FA70E52E2A533B4200621DF4 /* Model */,
 				FA70E50C2A52E94500621DF4 /* MeterInstallation.xcdatamodeld */,
@@ -206,6 +211,7 @@
 				FA70E5192A52F5F100621DF4 /* DataProvider.swift */,
 				FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */,
 				FA70E5452A540D2400621DF4 /* DeviceManagementDataProvider.swift */,
+				FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -268,6 +274,14 @@
 				FA70E54C2A54393100621DF4 /* DeviceDetailsView.swift */,
 			);
 			path = DeviceDetails;
+			sourceTree = "<group>";
+		};
+		FA70E5502A545FD200621DF4 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				FA70E5512A545FDE00621DF4 /* DevicePatchInfo.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA70E5522A545FDE00621DF4 /* DevicePatchInfo.swift in Sources */,
 				FA70E5262A53030600621DF4 /* DeviceListViewModel.swift in Sources */,
 				FA70E5182A52F39600621DF4 /* MeterInstallationError.swift in Sources */,
 				825A81D42A41BE700031BD66 /* SyncView.swift in Sources */,
@@ -357,6 +372,7 @@
 				FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */,
 				FA70E5392A537A6F00621DF4 /* ListItemView.swift in Sources */,
 				825A81D22A41BE680031BD66 /* DeviceListView.swift in Sources */,
+				FA70E54F2A54580E00621DF4 /* DeviceSyncProvider.swift in Sources */,
 				FA70E52D2A531CA600621DF4 /* Logger.swift in Sources */,
 				FA70E53D2A53FAF100621DF4 /* DeviceSectionView.swift in Sources */,
 				FA70E51C2A52F7D000621DF4 /* DataClient.swift in Sources */,

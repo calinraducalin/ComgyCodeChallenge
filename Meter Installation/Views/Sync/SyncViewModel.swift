@@ -9,15 +9,29 @@ import Foundation
 
 @MainActor
 final class SyncViewModel: ObservableObject {
-    let dataProvider: DeviceManagementDataProviding
+    typealias DeviceSyncManaging = DeviceManagementDataProviding & DeviceSyncProviding
+    let dataProvider: DeviceSyncManaging
     @Published private(set) var state: ListViewState = .success
     
-    init(dataProvider: DeviceManagementDataProviding = DataProvider.shared) {
+    init(dataProvider: DeviceSyncManaging = DataProvider.shared) {
         self.dataProvider = dataProvider
     }
 
     func uninstallDevice(_ device: Device) {
         guard !device.synced else { return }
         dataProvider.updateDevice(device, isInstalled: false)
+    }
+
+    func syncDevices(_ devices: [Device]) async {
+        state = .loading
+        do {
+            try await dataProvider.syncDevices(devices)
+            dataProvider.markAsSyncedDevices(devices)
+            state = .success
+        } catch {
+            let error: MeterInstallationError = error as? MeterInstallationError ?? .unkownError(error)
+            print(error.localizedDescription)
+            state = .failed
+        }
     }
 }

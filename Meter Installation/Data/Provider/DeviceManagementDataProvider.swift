@@ -9,6 +9,7 @@ import Foundation
 
 protocol DeviceManagementDataProviding: DataProviding {
     func updateDevice(_ device: Device, isInstalled: Bool)
+    func markAsSyncedDevices(_ devices: [Device])
 }
 
 extension DataProvider: DeviceManagementDataProviding {
@@ -16,5 +17,10 @@ extension DataProvider: DeviceManagementDataProviding {
         device.installationDate = isInstalled ? .now : nil
         device.synced = !isInstalled
         device.managedObjectContext?.saveIfNeeded()
+    }
+
+    func markAsSyncedDevices(_ devices: [Device]) {
+        devices.forEach { $0.synced = true }
+        devices.first?.managedObjectContext?.saveIfNeeded()
     }
 }

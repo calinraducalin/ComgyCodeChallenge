@@ -45,7 +45,7 @@ final class DeviceListViewModel: ObservableObject {
         }
     }
 
-    func swipeAction(device: Device) {
+    func installDevice(_ device: Device) {
         guard !device.isInstalled else { return }
         dataProvider.updateDevice(device, isInstalled: true)
     }

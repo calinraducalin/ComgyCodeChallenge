@@ -33,10 +33,9 @@ struct ListItemView: View {
         .swipeActions {
             Group {
                 if isSwipeEnabled {
-                    Button(swipeButtonTitle) {
+                    Button(swipeButtonTitle, role: swipeButtonRole) {
                         swipeAction(device)
                     }
-                    .tint(swipeButtonColor)
                 }
             }
         }
@@ -51,8 +50,8 @@ struct ListItemView: View {
         device.isInstalled ? "Uninstall" : "Install"
     }
 
-    private var swipeButtonColor: Color {
-        device.isInstalled ? .red : .green
+    private var swipeButtonRole: ButtonRole? {
+        device.isInstalled ? .destructive : .none
     }
 }
 

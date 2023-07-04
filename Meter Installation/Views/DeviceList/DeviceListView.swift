@@ -17,9 +17,9 @@ struct DeviceListView: View {
                 FilteredListView(
                     filter: viewModel.searchText,
                     state: viewModel.state,
-                    swipeAction: { device in
+                    deleteAction: { device in
                         withAnimation {
-                            viewModel.swipeAction(device: device)
+                            viewModel.installDevice(device)
                         }
                     }
                 )
@@ -57,15 +57,15 @@ struct DeviceListView_Previews: PreviewProvider {
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
     let state: ListViewState
-    let swipeAction: (_ device: Device) -> Void
+    let deleteAction: (_ device: Device) -> Void
 
-    init(filter: String, state: ListViewState, swipeAction: @escaping (_ device: Device) -> Void) {
+    init(filter: String, state: ListViewState, deleteAction: @escaping (_ device: Device) -> Void) {
         _devices = FetchRequest<Device>(
             sortDescriptors: [SortDescriptor(\.id)],
             predicate: Self.makePredicate(filter: filter)
         )
         self.state = state
-        self.swipeAction = swipeAction
+        self.deleteAction = deleteAction
     }
 
     var body: some View {
@@ -75,8 +75,8 @@ private struct FilteredListView: View {
                 EmptyView(title: title, subtitle: subtitle)
             } else {
                 List {
-                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices, swipeAction: swipeAction)
-                    DeviceSectionView(title: "Installed Devices", devices: installedDevices, swipeAction: swipeAction)
+                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices, primaryAction: deleteAction)
+                    DeviceSectionView(title: "Installed Devices", devices: installedDevices, primaryAction: deleteAction)
                 }
                 .listStyle(.sidebar)
             }

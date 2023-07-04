@@ -11,13 +11,12 @@ import Foundation
 final class SyncViewModel: ObservableObject {
     let dataProvider: DeviceManagementDataProviding
     @Published private(set) var state: ListViewState = .success
-    @Published var deletingDevice: Device?
     
     init(dataProvider: DeviceManagementDataProviding = DataProvider.shared) {
         self.dataProvider = dataProvider
     }
 
-    func swipeAction(device: Device) {
+    func uninstallDevice(_ device: Device) {
         guard !device.synced else { return }
         dataProvider.updateDevice(device, isInstalled: false)
     }

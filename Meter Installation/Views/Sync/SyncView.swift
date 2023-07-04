@@ -26,22 +26,10 @@ struct SyncView: View {
                         DeviceSectionView(
                             title: "Unsynced Devices",
                             devices: devices.map { $0 },
-                            swipeAction: { viewModel.deletingDevice = $0}
+                            primaryAction: deleteAction
                         )
                     }
                 }
-            }
-            .actionSheet(item: $viewModel.deletingDevice) { device in
-                ActionSheet(
-                    title: Text("Uninstall \(device.identifier)"),
-                    message: Text("Are you sure you want to uninstall this device?"),
-                    buttons: [
-                        .destructive(Text("Uninstall")) {
-                            deleteAction(device: device)
-                        },
-                        .cancel()
-                    ]
-                )
             }
             .toolbar {
                 ToolbarContentView(state: viewModel.state, devices: deviceList) {
@@ -57,7 +45,7 @@ struct SyncView: View {
 
     private func deleteAction(device: Device) {
         withAnimation {
-            viewModel.swipeAction(device: device)
+            viewModel.uninstallDevice(device)
         }
     }
 

@@ -9,18 +9,30 @@ import SwiftUI
 
 
 struct DeviceSectionView: View {
+    @State private var selectedDevice: Device?
     let title: String
     let devices: [Device]
-    let swipeAction: (_ device: Device) -> Void
+    let primaryAction: (_ device: Device) -> Void
 
     var body: some View {
         Group {
             if !devices.isEmpty {
                 Section("\(title) (\(devices.count))") {
-                    ForEach(devices) {
-                        ListItemView(device: $0, swipeAction: swipeAction)
+                    ForEach(devices, id: \.self) { device in
+                        Button {
+                            selectedDevice = device
+                        } label: {
+                            ListItemView(device: device) {
+                                primaryAction($0)
+                            }
+                        }
                     }
                 }
+            }
+        }
+        .sheet(item: $selectedDevice) { device in
+            DeviceDetailsView(device: device) {
+                primaryAction(device)
             }
         }
     }

@@ -18,7 +18,10 @@ struct ListItemView: View {
                 .foregroundColor(device.deviceType.imageColor)
             VStack(alignment: .leading) {
                 Text(device.identifier)
+                    .font(.title3)
                 Text(device.meterPointText)
+                    .font(.headline)
+                    .foregroundColor(.secondary)
             }
             Spacer()
             Image(systemName: device.status.systemImageName)

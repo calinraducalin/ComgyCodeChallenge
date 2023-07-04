@@ -48,9 +48,6 @@
 		825A81D12A41BE680031BD66 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		825A81D32A41BE700031BD66 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
 		829C51B42A449998003C8C9A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		829C51B72A44A3CF003C8C9A /* 3_Detail_Screen_(optional).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3_Detail_Screen_(optional).png"; sourceTree = "<group>"; };
-		829C51B82A44A3CF003C8C9A /* 1_Device_List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_Device_List.png; sourceTree = "<group>"; };
-		829C51B92A44A3CF003C8C9A /* 2_Sync_Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_Sync_Screen.png; sourceTree = "<group>"; };
 		FA70E50D2A52E94500621DF4 /* MeterInstallation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeterInstallation.xcdatamodel; sourceTree = "<group>"; };
 		FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterInstallationError.swift; sourceTree = "<group>"; };
 		FA70E5192A52F5F100621DF4 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
@@ -89,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				829C51B42A449998003C8C9A /* README.md */,
-				829C51B62A44A3B4003C8C9A /* Screens */,
 				14182FCE2863486A00427EF0 /* Meter Installation */,
 				14182FCD2863486A00427EF0 /* Products */,
 			);
@@ -133,16 +129,6 @@
 				FA70E52C2A531CA600621DF4 /* Logger.swift */,
 			);
 			path = Support;
-			sourceTree = "<group>";
-		};
-		829C51B62A44A3B4003C8C9A /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				829C51B82A44A3CF003C8C9A /* 1_Device_List.png */,
-				829C51B92A44A3CF003C8C9A /* 2_Sync_Screen.png */,
-				829C51B72A44A3CF003C8C9A /* 3_Detail_Screen_(optional).png */,
-			);
-			path = Screens;
 			sourceTree = "<group>";
 		};
 		FA70E50F2A52E98F00621DF4 /* Data */ = {

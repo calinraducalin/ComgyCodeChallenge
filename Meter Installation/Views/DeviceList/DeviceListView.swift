@@ -62,6 +62,7 @@ struct DeviceListView_Previews: PreviewProvider {
 
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
+    @State private var selectedDevice: Device?
     let state: ViewState
     let deleteAction: (_ device: Device) -> Void
 
@@ -81,11 +82,27 @@ private struct FilteredListView: View {
                 EmptyView(title: title, subtitle: subtitle)
             } else {
                 List {
-                    DeviceSectionView(title: "Uninstalled Devices", devices: uninstalledDevices, primaryAction: deleteAction)
-                    DeviceSectionView(title: "Installed Devices", devices: installedDevices, primaryAction: deleteAction)
+                    DeviceSectionView(
+                        selectedDevice: $selectedDevice,
+                        title: "Uninstalled Devices",
+                        devices: uninstalledDevices,
+                        primaryAction: deleteAction
+                    )
+                    DeviceSectionView(
+                        selectedDevice: $selectedDevice,
+                        title: "Installed Devices",
+                        devices: installedDevices,
+                        primaryAction: deleteAction
+                    )
                 }
                 .listStyle(.sidebar)
             }
+        }
+        .sheet(item: $selectedDevice) { device in
+            let viewModel = DeviceDetailsViewModel(device: device) {
+                deleteAction(device)
+            }
+            DeviceDetailsView(viewModel: viewModel)
         }
     }
 

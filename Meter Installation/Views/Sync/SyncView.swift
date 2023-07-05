@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SyncView: View {
     @StateObject var viewModel = SyncViewModel()
+    @State private var selectedDevice: Device?
     @FetchRequest(
         sortDescriptors: [ SortDescriptor(\.id)],
         predicate: PredicateMaker.makeSyncedPredicate(synced: false),
@@ -24,6 +25,7 @@ struct SyncView: View {
                 } else {
                     List {
                         DeviceSectionView(
+                            selectedDevice: $selectedDevice,
                             title: "Unsynced Devices",
                             devices: devices.map { $0 },
                             primaryAction: deleteAction
@@ -37,6 +39,13 @@ struct SyncView: View {
                         await viewModel.syncDevices(deviceList)
                     }
                 }
+            }
+            .sheet(item: $selectedDevice) { device in
+                let viewModel = DeviceDetailsViewModel(device: device) {
+                    deleteAction(device: device)
+                }
+
+                DeviceDetailsView(viewModel: viewModel)
             }
             .refreshable {
                 await viewModel.syncDevices(deviceList)

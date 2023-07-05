@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct DeviceSectionView: View {
-    @State private var selectedDevice: Device?
+    @Binding var selectedDevice: Device?
     let title: String
     let devices: [Device]
     let primaryAction: (_ device: Device) -> Void
+
 
     var body: some View {
         Group {
@@ -28,12 +29,6 @@ struct DeviceSectionView: View {
                     }
                 }
             }
-        }
-        .sheet(item: $selectedDevice) { device in
-            let viewModel = DeviceDetailsViewModel(device: device) {
-                primaryAction(device)
-            }
-            DeviceDetailsView(viewModel: viewModel)
         }
     }
 }
@@ -52,7 +47,11 @@ struct DeviceSectionView_Previews: PreviewProvider {
         device1.meterPointDescription = "Hallway"
         device1.type = "cold_water"
 
-        return DeviceSectionView(title: "Installed devices", devices: [device0, device1]) { _ in }
+        return DeviceSectionView(
+            selectedDevice: .constant(nil),
+            title: "Installed devices",
+            devices: [device0, device1]
+        ) { _ in }
 
     }
 }

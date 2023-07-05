@@ -47,9 +47,6 @@ struct SyncView: View {
 
                 DeviceDetailsView(viewModel: viewModel)
             }
-            .refreshable {
-                await viewModel.syncDevices(deviceList)
-            }
             .alert(
                 viewModel.currentErrorTitle,
                 isPresented: $viewModel.isShowingError,
@@ -106,13 +103,20 @@ private struct ToolbarContentView: View {
     let syncAction: () -> Void
 
     var body: some View {
-        HStack {
+        Group {
             if !devices.isEmpty {
-                Button(title, action: syncAction)
-                    .disabled(state == .loading)
+                Button(action: syncAction) {
+                    if state == .loading {
+                        HStack(spacing: 8) {
+                            Text("Syncing...")
+                            ProgressView()
+                        }
+                    } else {
+                        Text("Sync")
+                    }
+                }
+                .disabled(state == .loading)
             }
         }
     }
-
-    private var title: String { state == .loading ? "Syncing..." : "Sync" }
 }

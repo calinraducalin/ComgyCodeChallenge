@@ -31,9 +31,6 @@ struct DeviceListView: View {
                     }
                 }
             }
-            .refreshable {
-                await viewModel.updateDevices()
-            }
             .task {
                 await viewModel.updateDevicesIfNeeded()
             }
@@ -144,11 +141,16 @@ private struct ToolbarContentView: View {
     let refreshAction: () -> Void
 
     var body: some View {
-        HStack {
-            Button(title, action: refreshAction)
-                .disabled(state == .loading)
+        Button(action: refreshAction) {
+            if state == .loading {
+                HStack(spacing: 8) {
+                    Text("Refreshing...")
+                    ProgressView()
+                }
+            } else {
+                Text("Refresh")
+            }
         }
+        .disabled(state == .loading)
     }
-
-    private var title: String { state == .loading ? "Refreshing..." : "Refresh" }
 }

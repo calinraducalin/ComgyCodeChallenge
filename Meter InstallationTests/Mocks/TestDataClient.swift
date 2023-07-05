@@ -13,8 +13,10 @@ class TestDataClient: DataClient {
         static let responseTime: ClosedRange<UInt64> = 1_000_000...5_000_000 // 1 to 5 milliseconds
     }
     let responseData: Data
+    let error: Error?
 
-    init(response: Encodable = "") {
+    init(response: Encodable = "", error: Error? = nil) {
+        self.error = error
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let data = try? encoder.encode(response)
@@ -23,11 +25,13 @@ class TestDataClient: DataClient {
 
     func getData(from: URL) async throws -> Data {
         try await Task.sleep(nanoseconds: UInt64.random(in: Constants.responseTime))
-        return responseData
+        guard let error else { return responseData }
+        throw error
     }
 
     func patchData(_ data: Data, to: URL) async throws -> Data {
         try await Task.sleep(nanoseconds: UInt64.random(in: Constants.responseTime))
-        return responseData
+        guard let error else { return responseData }
+        throw error
     }
 }

@@ -45,21 +45,4 @@ final class DeviceManagementDataStoreTests: XCTestCase {
         XCTAssert(storedDevices.first?.synced == true)
         XCTAssertNil(storedDevices.first?.installationDate)
     }
-
-    func testMarkAllDevicesAsSynced() {
-        let client = TestDataClient()
-        let dataStore = DataStorage.test(client: client)
-        let firstDevice = dataStore.insertDevice(.coldWater(installationDate: .now), synced: false)
-        let secondDevice = dataStore.insertDevice(.warmWater(installationDate: .now), synced: false)
-
-        //  WHEN
-        dataStore.markAsSyncedDevices([firstDevice, secondDevice])
-
-        //  THEN
-        let storedDevices = dataStore.getStoredDevices()
-        XCTAssertEqual(storedDevices.count, 2)
-        XCTAssertTrue(storedDevices[0].synced)
-        XCTAssertTrue(storedDevices[1].synced)
-    }
-
 }

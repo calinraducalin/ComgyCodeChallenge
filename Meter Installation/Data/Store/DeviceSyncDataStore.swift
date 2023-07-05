@@ -20,7 +20,8 @@ extension DataStorage: DeviceSyncDataStore {
                     return device
                 }
             }
-            return try await group.waitForAll()
+            try await group.waitForAll()
+            markAsSyncedDevices(devices)
         }
     }
 }
@@ -35,6 +36,11 @@ private extension DeviceSyncDataStore {
         } catch {
             throw MeterInstallationError.syncDevice
         }
+    }
+
+    func markAsSyncedDevices(_ devices: [Device]) {
+        devices.forEach { $0.synced = true }
+        devices.first?.managedObjectContext?.saveIfNeeded()
     }
 }
 

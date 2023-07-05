@@ -1,5 +1,5 @@
 //
-//  DataStorage+Test.swift
+//  DataStorage+Mock.swift
 //  Meter InstallationTests
 //
 //  Created by Radu Calin Calin on 05.07.2023.

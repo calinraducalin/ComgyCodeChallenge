@@ -1,5 +1,5 @@
 //
-//  DeviceResponse+Test.swift
+//  DeviceResponse+Mock.swift
 //  Meter InstallationTests
 //
 //  Created by Radu Calin Calin on 05.07.2023.

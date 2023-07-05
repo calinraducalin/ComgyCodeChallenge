@@ -42,9 +42,10 @@
 		FAC1C9402A55609F00E487FA /* DeviceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C93F2A55609F00E487FA /* DeviceDetailsViewModel.swift */; };
 		FAC1C9482A5568B700E487FA /* DeviceDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9472A5568B700E487FA /* DeviceDataStoreTests.swift */; };
 		FAC1C9502A55743F00E487FA /* TestDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C94F2A55743F00E487FA /* TestDataClient.swift */; };
-		FAC1C9522A557A4100E487FA /* DataStorage+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9512A557A4100E487FA /* DataStorage+Test.swift */; };
-		FAC1C9542A55950E00E487FA /* DeviceResponse+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9532A55950E00E487FA /* DeviceResponse+Test.swift */; };
+		FAC1C9522A557A4100E487FA /* DataStorage+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9512A557A4100E487FA /* DataStorage+Mock.swift */; };
+		FAC1C9542A55950E00E487FA /* DeviceResponse+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9532A55950E00E487FA /* DeviceResponse+Mock.swift */; };
 		FAC1C9582A55A5A900E487FA /* DeviceManagementDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */; };
+		FAC1C95B2A55C52900E487FA /* DeviceSyncDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,9 +96,10 @@
 		FAC1C9452A5568B700E487FA /* Meter InstallationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Meter InstallationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC1C9472A5568B700E487FA /* DeviceDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataStoreTests.swift; sourceTree = "<group>"; };
 		FAC1C94F2A55743F00E487FA /* TestDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataClient.swift; sourceTree = "<group>"; };
-		FAC1C9512A557A4100E487FA /* DataStorage+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStorage+Test.swift"; sourceTree = "<group>"; };
-		FAC1C9532A55950E00E487FA /* DeviceResponse+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceResponse+Test.swift"; sourceTree = "<group>"; };
+		FAC1C9512A557A4100E487FA /* DataStorage+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStorage+Mock.swift"; sourceTree = "<group>"; };
+		FAC1C9532A55950E00E487FA /* DeviceResponse+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceResponse+Mock.swift"; sourceTree = "<group>"; };
 		FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManagementDataStoreTests.swift; sourceTree = "<group>"; };
+		FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSyncDataStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,8 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				FAC1C94F2A55743F00E487FA /* TestDataClient.swift */,
-				FAC1C9512A557A4100E487FA /* DataStorage+Test.swift */,
-				FAC1C9532A55950E00E487FA /* DeviceResponse+Test.swift */,
+				FAC1C9512A557A4100E487FA /* DataStorage+Mock.swift */,
+				FAC1C9532A55950E00E487FA /* DeviceResponse+Mock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -344,6 +346,7 @@
 			children = (
 				FAC1C9472A5568B700E487FA /* DeviceDataStoreTests.swift */,
 				FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */,
+				FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */,
 			);
 			path = DataStore;
 			sourceTree = "<group>";
@@ -487,9 +490,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC1C9502A55743F00E487FA /* TestDataClient.swift in Sources */,
-				FAC1C9522A557A4100E487FA /* DataStorage+Test.swift in Sources */,
-				FAC1C9542A55950E00E487FA /* DeviceResponse+Test.swift in Sources */,
+				FAC1C9522A557A4100E487FA /* DataStorage+Mock.swift in Sources */,
+				FAC1C9542A55950E00E487FA /* DeviceResponse+Mock.swift in Sources */,
 				FAC1C9482A5568B700E487FA /* DeviceDataStoreTests.swift in Sources */,
+				FAC1C95B2A55C52900E487FA /* DeviceSyncDataStoreTests.swift in Sources */,
 				FAC1C9582A55A5A900E487FA /* DeviceManagementDataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

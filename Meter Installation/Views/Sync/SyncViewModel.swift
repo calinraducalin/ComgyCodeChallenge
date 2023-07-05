@@ -27,7 +27,6 @@ final class SyncViewModel: ObservableObject, ViewStateErrorHandler {
         state = .loading
         do {
             try await dataStore.syncDevices(devices)
-            dataStore.markAsSyncedDevices(devices)
             state = .success
         } catch {
             let error: MeterInstallationError = error as? MeterInstallationError ?? .unknown

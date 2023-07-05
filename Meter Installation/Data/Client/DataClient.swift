@@ -13,6 +13,27 @@ protocol DataClient {
     func patchData(_ data: Data, to: URL) async throws -> Data
 }
 
+extension DataClient {
+    func makeURL(endpoint: String) -> URL {
+        guard let url = URL(string: "https://comgy.io") else {
+            fatalError("Invalid URL!")
+        }
+        return url.appendingPathComponent(endpoint)
+    }
+
+    func makeDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
+
+    func makeEncoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }
+}
+
 extension URLSession: DataClient {
     func getData(from url: URL) async throws -> Data {
         var request = URLRequest(url: url)
@@ -36,26 +57,5 @@ private extension URLSession {
         }
 
         return data
-    }
-}
-
-extension DataClient {
-    func makeURL(endpoint: String) -> URL {
-        guard let url = URL(string: "https://comgy.io") else {
-            fatalError("Invalid URL!")
-        }
-        return url.appendingPathComponent(endpoint)
-    }
-
-    func makeDecoder() -> JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return decoder
-    }
-
-    func makeEncoder() -> JSONEncoder {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        return encoder
     }
 }

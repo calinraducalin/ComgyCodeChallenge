@@ -9,17 +9,17 @@ import Foundation
 
 @MainActor
 final class DeviceListViewModel: ObservableObject, ViewStateErrorHandler {
-    typealias DevicesDataProviding = DeviceDataProviding & DeviceManagementDataProviding
+    typealias DeviceListDataStore = DeviceDataStore & DeviceManagementDataStore
 
-    let dataProvider: DevicesDataProviding
+    let dataStore: DeviceListDataStore
     @Published private(set) var state: ViewState = .success
     @Published var searchText: String = ""
     @Published var isShowingError = false
 
     private var lastUpdated: Date?
 
-    init(dataProvider: DevicesDataProviding = DataProvider.shared) {
-        self.dataProvider = dataProvider
+    init(dataStore: DeviceListDataStore = DataStorage.shared) {
+        self.dataStore = dataStore
     }
 
     var shouldAutoRefreshData: Bool {
@@ -36,7 +36,7 @@ final class DeviceListViewModel: ObservableObject, ViewStateErrorHandler {
     func updateDevices() async {
         state = .loading
         do {
-            try await dataProvider.fetchDevices()
+            try await dataStore.fetchDevices()
             lastUpdated = .now
             state = .success
         } catch {
@@ -48,6 +48,6 @@ final class DeviceListViewModel: ObservableObject, ViewStateErrorHandler {
 
     func installDevice(_ device: Device) {
         guard !device.isInstalled else { return }
-        dataProvider.updateDevice(device, isInstalled: true)
+        dataStore.updateDevice(device, isInstalled: true)
     }
 }

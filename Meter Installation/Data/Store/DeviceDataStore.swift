@@ -1,5 +1,5 @@
 //
-//  DeviceDataProvider.swift
+//  DeviceDataStore.swift
 //  Meter Installation
 //
 //  Created by Radu Calin Calin on 03.07.2023.
@@ -7,11 +7,11 @@
 
 import CoreData
 
-protocol DeviceDataProviding: DataProviding {
+protocol DeviceDataStore: DataStore {
     func fetchDevices() async throws
 }
 
-extension DataProvider: DeviceDataProviding {
+extension DataStorage: DeviceDataStore {
     func fetchDevices() async throws {
         let devicesURL = client.makeURL(endpoint: "/devices")
         let data = try await client.getData(from: devicesURL)
@@ -26,7 +26,7 @@ extension DataProvider: DeviceDataProviding {
     }
 }
 
-private extension DataProvider {
+private extension DataStorage {
     func importDevices(_ devices: [DeviceResponse]) async throws {
         guard !devices.isEmpty else { return }
 

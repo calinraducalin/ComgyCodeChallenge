@@ -51,12 +51,12 @@ struct DeviceListView: View {
 }
 
 struct DeviceListView_Previews: PreviewProvider {
-    static let viewModel = DeviceListViewModel(dataProvider: DataProvider.preview)
+    static let viewModel = DeviceListViewModel(dataStore: DataStorage.preview)
     
     static var previews: some View {
         DeviceListView(viewModel: viewModel)
             .environment(\.managedObjectContext,
-                          DataProvider.preview.viewContext)
+                          DataStorage.preview.viewContext)
     }
 }
 

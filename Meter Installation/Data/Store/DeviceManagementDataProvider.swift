@@ -1,5 +1,5 @@
 //
-//  DeviceManagementDataProvider.swift
+//  DeviceManagementDataStore.swift
 //  Meter Installation
 //
 //  Created by Radu Calin Calin on 04.07.2023.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol DeviceManagementDataProviding: DataProviding {
+protocol DeviceManagementDataStore: DataStore {
     func updateDevice(_ device: Device, isInstalled: Bool)
     func markAsSyncedDevices(_ devices: [Device])
 }
 
-extension DataProvider: DeviceManagementDataProviding {
+extension DataStorage: DeviceManagementDataStore {
     func updateDevice(_ device: Device, isInstalled: Bool) {
         device.installationDate = isInstalled ? .now : nil
         device.synced = !isInstalled

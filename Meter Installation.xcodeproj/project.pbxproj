@@ -17,12 +17,12 @@
 		829C51B52A449998003C8C9A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 829C51B42A449998003C8C9A /* README.md */; };
 		FA70E50E2A52E94500621DF4 /* MeterInstallation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA70E50C2A52E94500621DF4 /* MeterInstallation.xcdatamodeld */; };
 		FA70E5182A52F39600621DF4 /* MeterInstallationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */; };
-		FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5192A52F5F100621DF4 /* DataProvider.swift */; };
+		FA70E51A2A52F5F100621DF4 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5192A52F5F100621DF4 /* DataStorage.swift */; };
 		FA70E51C2A52F7D000621DF4 /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E51B2A52F7D000621DF4 /* DataClient.swift */; };
 		FA70E51E2A52F95F00621DF4 /* DataClient+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E51D2A52F95F00621DF4 /* DataClient+Preview.swift */; };
 		FA70E5242A52FCC600621DF4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5232A52FCC600621DF4 /* MainViewModel.swift */; };
 		FA70E5262A53030600621DF4 /* DeviceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5252A53030600621DF4 /* DeviceListViewModel.swift */; };
-		FA70E5282A53043E00621DF4 /* DeviceDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */; };
+		FA70E5282A53043E00621DF4 /* DeviceDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5272A53043E00621DF4 /* DeviceDataStore.swift */; };
 		FA70E52B2A530D0C00621DF4 /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52A2A530D0C00621DF4 /* DeviceResponse.swift */; };
 		FA70E52D2A531CA600621DF4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52C2A531CA600621DF4 /* Logger.swift */; };
 		FA70E5302A533B5600621DF4 /* Device+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E52F2A533B5600621DF4 /* Device+.swift */; };
@@ -53,12 +53,12 @@
 		829C51B42A449998003C8C9A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FA70E50D2A52E94500621DF4 /* MeterInstallation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeterInstallation.xcdatamodel; sourceTree = "<group>"; };
 		FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterInstallationError.swift; sourceTree = "<group>"; };
-		FA70E5192A52F5F100621DF4 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		FA70E5192A52F5F100621DF4 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		FA70E51B2A52F7D000621DF4 /* DataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
 		FA70E51D2A52F95F00621DF4 /* DataClient+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataClient+Preview.swift"; sourceTree = "<group>"; };
 		FA70E5232A52FCC600621DF4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FA70E5252A53030600621DF4 /* DeviceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModel.swift; sourceTree = "<group>"; };
-		FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataProvider.swift; sourceTree = "<group>"; };
+		FA70E5272A53043E00621DF4 /* DeviceDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataStore.swift; sourceTree = "<group>"; };
 		FA70E52A2A530D0C00621DF4 /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
 		FA70E52C2A531CA600621DF4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FA70E52F2A533B5600621DF4 /* Device+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+.swift"; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		FA70E50F2A52E98F00621DF4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				FA70E5202A52FA5500621DF4 /* Provider */,
+				FA70E5202A52FA5500621DF4 /* Store */,
 				FA70E51F2A52FA0800621DF4 /* Client */,
 				FA70E5502A545FD200621DF4 /* Request */,
 				FA70E5292A530C4300621DF4 /* Response */,
@@ -207,15 +207,15 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
-		FA70E5202A52FA5500621DF4 /* Provider */ = {
+		FA70E5202A52FA5500621DF4 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				FA70E5192A52F5F100621DF4 /* DataProvider.swift */,
-				FA70E5272A53043E00621DF4 /* DeviceDataProvider.swift */,
+				FA70E5192A52F5F100621DF4 /* DataStorage.swift */,
+				FA70E5272A53043E00621DF4 /* DeviceDataStore.swift */,
 				FA70E5452A540D2400621DF4 /* DeviceManagementDataProvider.swift */,
 				FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */,
 			);
-			path = Provider;
+			path = Store;
 			sourceTree = "<group>";
 		};
 		FA70E5292A530C4300621DF4 /* Response */ = {
@@ -373,7 +373,7 @@
 				FA70E51E2A52F95F00621DF4 /* DataClient+Preview.swift in Sources */,
 				825A81C82A4064EB0031BD66 /* URLSession.swift in Sources */,
 				FA70E5462A540D2400621DF4 /* DeviceManagementDataProvider.swift in Sources */,
-				FA70E51A2A52F5F100621DF4 /* DataProvider.swift in Sources */,
+				FA70E51A2A52F5F100621DF4 /* DataStorage.swift in Sources */,
 				FA70E5392A537A6F00621DF4 /* ListItemView.swift in Sources */,
 				825A81D22A41BE680031BD66 /* DeviceListView.swift in Sources */,
 				FA70E54F2A54580E00621DF4 /* DeviceSyncProvider.swift in Sources */,
@@ -386,7 +386,7 @@
 				FA70E5242A52FCC600621DF4 /* MainViewModel.swift in Sources */,
 				FA70E5372A5369AD00621DF4 /* ViewState.swift in Sources */,
 				FA70E53F2A54011B00621DF4 /* PredicateMaker.swift in Sources */,
-				FA70E5282A53043E00621DF4 /* DeviceDataProvider.swift in Sources */,
+				FA70E5282A53043E00621DF4 /* DeviceDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

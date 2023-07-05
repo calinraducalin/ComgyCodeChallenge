@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  DeviceSyncDataStore.swift
 //  Meter Installation
 //
 //  Created by Radu Calin Calin on 04.07.2023.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol DeviceSyncProviding: DataProviding {
+protocol DeviceSyncDataStore: DataStore {
     func syncDevices(_ devices: [Device]) async throws
 }
 
-extension DataProvider: DeviceSyncProviding {
+extension DataStorage: DeviceSyncDataStore {
     func syncDevices(_ devices: [Device]) async throws  {
         try await withThrowingTaskGroup(of: Device.self) { group in
             devices.forEach { device in
@@ -25,7 +25,7 @@ extension DataProvider: DeviceSyncProviding {
     }
 }
 
-private extension DeviceSyncProviding {
+private extension DeviceSyncDataStore {
     func syncDevice(_ device: Device) async throws {
         let syncURL = client.makeURL(endpoint: "/devices/\(device.identifier)")
         let encoder = client.makeEncoder()

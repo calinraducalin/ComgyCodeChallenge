@@ -40,13 +40,13 @@ struct DeviceSectionView: View {
 
 struct DeviceSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        let device0 = Device(context: DataProvider.preview.viewContext)
+        let device0 = Device(context: DataStorage.preview.viewContext)
         device0.id = "WWM-0001-12"
         device0.installationDate = Date()
         device0.meterPointDescription = "Kitchen"
         device0.type = "warm_water"
 
-        let device1 = Device(context: DataProvider.preview.viewContext)
+        let device1 = Device(context: DataStorage.preview.viewContext)
         device1.id = "WWM-0001-13"
         device1.installationDate = Date()
         device1.meterPointDescription = "Hallway"

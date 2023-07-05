@@ -13,12 +13,12 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            DeviceListView(viewModel: .init(dataProvider: viewModel.dataProvider))
+            DeviceListView(viewModel: .init(dataStore: viewModel.dataStore))
                 .tabItem {
                     Label("Devices",
                           systemImage: "screwdriver")
                 }
-            SyncView(viewModel: .init(dataProvider: viewModel.dataProvider))
+            SyncView(viewModel: .init(dataStore: viewModel.dataStore))
                 .tabItem {
                     Label("Sync", systemImage: "arrow.2.circlepath")
                 }
@@ -28,11 +28,11 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let viewModel = MainViewModel(dataProvider: DataProvider.preview)
+    static let viewModel = MainViewModel(dataStore: DataStorage.preview)
 
     static var previews: some View {
         MainView(viewModel: viewModel)
             .environment(\.managedObjectContext,
-                          DataProvider.preview.viewContext)
+                          DataStorage.preview.viewContext)
     }
 }

@@ -9,25 +9,25 @@ import Foundation
 
 @MainActor
 final class SyncViewModel: ObservableObject, ViewStateErrorHandler {
-    typealias DeviceSyncManaging = DeviceManagementDataProviding & DeviceSyncProviding
-    let dataProvider: DeviceSyncManaging
+    typealias DeviceSyncManagementDataStore = DeviceManagementDataStore & DeviceSyncDataStore
+    let dataStore: DeviceSyncManagementDataStore
     @Published private(set) var state: ViewState = .success
     @Published var isShowingError = false
     
-    init(dataProvider: DeviceSyncManaging = DataProvider.shared) {
-        self.dataProvider = dataProvider
+    init(dataStore: DeviceSyncManagementDataStore = DataStorage.shared) {
+        self.dataStore = dataStore
     }
 
     func uninstallDevice(_ device: Device) {
         guard !device.synced else { return }
-        dataProvider.updateDevice(device, isInstalled: false)
+        dataStore.updateDevice(device, isInstalled: false)
     }
 
     func syncDevices(_ devices: [Device]) async {
         state = .loading
         do {
-            try await dataProvider.syncDevices(devices)
-            dataProvider.markAsSyncedDevices(devices)
+            try await dataStore.syncDevices(devices)
+            dataStore.markAsSyncedDevices(devices)
             state = .success
         } catch {
             let error: MeterInstallationError = error as? MeterInstallationError ?? .unknown

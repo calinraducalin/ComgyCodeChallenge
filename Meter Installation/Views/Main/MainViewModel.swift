@@ -9,10 +9,10 @@ import Foundation
 
 @MainActor
 final class MainViewModel: ObservableObject {
-    let dataProvider: DataProvider
+    let dataStore: DataStorage
 
-    init(dataProvider: DataProvider = .shared) {
-        self.dataProvider = dataProvider
+    init(dataStore: DataStorage = .shared) {
+        self.dataStore = dataStore
     }
 
 }

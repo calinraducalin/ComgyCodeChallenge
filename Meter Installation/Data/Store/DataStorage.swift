@@ -1,5 +1,5 @@
 //
-//  DataProvider.swift
+//  DataStorage.swift
 //  Meter Installation
 //
 //  Created by Radu Calin Calin on 03.07.2023.
@@ -8,7 +8,7 @@
 import CoreData
 import OSLog
 
-protocol DataProviding: AnyObject {
+protocol DataStore: AnyObject {
     var logger: Logger { get }
     var client: DataClient { get }
     var viewContext: NSManagedObjectContext { get }
@@ -17,8 +17,8 @@ protocol DataProviding: AnyObject {
     func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async
 }
 
-final class DataProvider: DataProviding {
-    static let shared = DataProvider()
+final class DataStorage: DataStore {
+    static let shared = DataStorage()
 
     let client: DataClient
     var logger: Logger { AppLogger.data }
@@ -74,7 +74,7 @@ final class DataProvider: DataProviding {
 
 // - Preview
 
-extension DataProvider {
-    static let preview = DataProvider(inMemory: true, client: PreviewClient())
+extension DataStorage {
+    static let preview = DataStorage(inMemory: true, client: PreviewClient())
 }
 

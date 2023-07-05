@@ -100,8 +100,6 @@ private class DeviceListDataStoreMock: SyncViewModel.DeviceSyncManagementDataSto
         viewContext
     }
 
-    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async {}
-
     func resetAllData() throws {}
 
 }

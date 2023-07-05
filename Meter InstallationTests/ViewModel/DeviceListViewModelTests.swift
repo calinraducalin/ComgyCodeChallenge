@@ -125,8 +125,6 @@ private class DeviceListDataStoreMock: DeviceListViewModel.DeviceListDataStore {
 
     func makeNewTaskContext() -> NSManagedObjectContext { viewContext }
 
-    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async {}
-
     func resetAllData() throws {}
 
 }

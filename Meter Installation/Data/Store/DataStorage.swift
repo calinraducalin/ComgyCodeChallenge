@@ -14,7 +14,6 @@ protocol DataStore: AnyObject {
     var viewContext: NSManagedObjectContext { get }
 
     func makeNewTaskContext() -> NSManagedObjectContext
-    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async
     func resetAllData() throws
 }
 
@@ -56,16 +55,6 @@ final class DataStorage: DataStore {
 
     func makeNewTaskContext() -> NSManagedObjectContext {
         container.newBackgroundContext()
-    }
-
-    func backgroundTask(_ task: @escaping (NSManagedObjectContext) -> Void) async {
-        await withCheckedContinuation { continuanion in
-            container.performBackgroundTask { context in
-                task(context)
-                context.saveIfNeeded()
-                continuanion.resume()
-            }
-        }
     }
 
     func resetAllData() throws {

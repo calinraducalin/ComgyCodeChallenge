@@ -18,7 +18,7 @@ struct DeviceListView: View {
                     filter: viewModel.searchText,
                     state: viewModel.state,
                     selectedDevice: $viewModel.selectedDevice,
-                    deleteAction: { device in
+                    primaryAction: { device in
                         withAnimation {
                             viewModel.installDevice(device)
                         }
@@ -71,15 +71,15 @@ private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
     @Binding var selectedDevice: Device?
     let state: ViewState
-    let deleteAction: (_ device: Device) -> Void
+    let primaryAction: (_ device: Device) -> Void
 
-    init(filter: String, state: ViewState, selectedDevice: Binding<Device?>, deleteAction: @escaping (_ device: Device) -> Void) {
+    init(filter: String, state: ViewState, selectedDevice: Binding<Device?>, primaryAction: @escaping (_ device: Device) -> Void) {
         _devices = FetchRequest<Device>(
             sortDescriptors: [SortDescriptor(\.id)],
             predicate: Self.makePredicate(filter: filter)
         )
         self.state = state
-        self.deleteAction = deleteAction
+        self.primaryAction = primaryAction
         _selectedDevice = selectedDevice
     }
 
@@ -94,13 +94,13 @@ private struct FilteredListView: View {
                         selectedDevice: $selectedDevice,
                         title: "Uninstalled Devices",
                         devices: uninstalledDevices,
-                        primaryAction: deleteAction
+                        primaryAction: primaryAction
                     )
                     DeviceSectionView(
                         selectedDevice: $selectedDevice,
                         title: "Installed Devices",
                         devices: installedDevices,
-                        primaryAction: deleteAction
+                        primaryAction: primaryAction
                     )
                 }
                 .listStyle(.sidebar)

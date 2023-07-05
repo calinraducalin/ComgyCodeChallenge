@@ -15,6 +15,7 @@
 		825A81D22A41BE680031BD66 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A81D12A41BE680031BD66 /* DeviceListView.swift */; };
 		825A81D42A41BE700031BD66 /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A81D32A41BE700031BD66 /* SyncView.swift */; };
 		829C51B52A449998003C8C9A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 829C51B42A449998003C8C9A /* README.md */; };
+		FA5670B92A55D98000095966 /* DeviceDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5670B82A55D98000095966 /* DeviceDetailsViewModelTests.swift */; };
 		FA70E50E2A52E94500621DF4 /* MeterInstallation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA70E50C2A52E94500621DF4 /* MeterInstallation.xcdatamodeld */; };
 		FA70E5182A52F39600621DF4 /* MeterInstallationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */; };
 		FA70E51A2A52F5F100621DF4 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5192A52F5F100621DF4 /* DataStorage.swift */; };
@@ -46,6 +47,8 @@
 		FAC1C9542A55950E00E487FA /* DeviceResponse+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9532A55950E00E487FA /* DeviceResponse+Mock.swift */; };
 		FAC1C9582A55A5A900E487FA /* DeviceManagementDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */; };
 		FAC1C95B2A55C52900E487FA /* DeviceSyncDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */; };
+		FAC1C95E2A55CA8500E487FA /* DeviceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C95D2A55CA8500E487FA /* DeviceListViewModelTests.swift */; };
+		FAF99BC02A55D5ED008AF2D5 /* SyncViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF99BBF2A55D5ED008AF2D5 /* SyncViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,7 @@
 		825A81D12A41BE680031BD66 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		825A81D32A41BE700031BD66 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
 		829C51B42A449998003C8C9A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FA5670B82A55D98000095966 /* DeviceDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		FA70E50D2A52E94500621DF4 /* MeterInstallation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeterInstallation.xcdatamodel; sourceTree = "<group>"; };
 		FA70E5172A52F39600621DF4 /* MeterInstallationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterInstallationError.swift; sourceTree = "<group>"; };
 		FA70E5192A52F5F100621DF4 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		FAC1C9532A55950E00E487FA /* DeviceResponse+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceResponse+Mock.swift"; sourceTree = "<group>"; };
 		FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManagementDataStoreTests.swift; sourceTree = "<group>"; };
 		FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSyncDataStoreTests.swift; sourceTree = "<group>"; };
+		FAC1C95D2A55CA8500E487FA /* DeviceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModelTests.swift; sourceTree = "<group>"; };
+		FAF99BBF2A55D5ED008AF2D5 /* SyncViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +331,7 @@
 		FAC1C9462A5568B700E487FA /* Meter InstallationTests */ = {
 			isa = PBXGroup;
 			children = (
+				FAC1C95C2A55CA6600E487FA /* ViewModel */,
 				FAC1C9592A55A5B500E487FA /* DataStore */,
 				FAC1C94E2A55731800E487FA /* Mocks */,
 			);
@@ -349,6 +356,16 @@
 				FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */,
 			);
 			path = DataStore;
+			sourceTree = "<group>";
+		};
+		FAC1C95C2A55CA6600E487FA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1C95D2A55CA8500E487FA /* DeviceListViewModelTests.swift */,
+				FAF99BBF2A55D5ED008AF2D5 /* SyncViewModelTests.swift */,
+				FA5670B82A55D98000095966 /* DeviceDetailsViewModelTests.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,9 +509,12 @@
 				FAC1C9502A55743F00E487FA /* TestDataClient.swift in Sources */,
 				FAC1C9522A557A4100E487FA /* DataStorage+Mock.swift in Sources */,
 				FAC1C9542A55950E00E487FA /* DeviceResponse+Mock.swift in Sources */,
+				FAC1C95E2A55CA8500E487FA /* DeviceListViewModelTests.swift in Sources */,
 				FAC1C9482A5568B700E487FA /* DeviceDataStoreTests.swift in Sources */,
+				FA5670B92A55D98000095966 /* DeviceDetailsViewModelTests.swift in Sources */,
 				FAC1C95B2A55C52900E487FA /* DeviceSyncDataStoreTests.swift in Sources */,
 				FAC1C9582A55A5A900E487FA /* DeviceManagementDataStoreTests.swift in Sources */,
+				FAF99BC02A55D5ED008AF2D5 /* SyncViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

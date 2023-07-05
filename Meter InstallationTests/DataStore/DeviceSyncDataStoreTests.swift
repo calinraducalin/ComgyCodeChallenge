@@ -36,11 +36,11 @@ final class DeviceSyncDataStoreTests: XCTestCase {
         let client = TestDataClient(error: MeterInstallationError.network)
         let dataStore = DataStorage.test(client: client)
         let firstDevice = dataStore.insertDevice(.coldWater(installationDate: .now), synced: false)
-        let thirdDevice = dataStore.insertDevice(.heating(installationDate: .now), synced: false)
-        let secondDevice = dataStore.insertDevice(.warmWater(), synced: true)
+        let secondDevice = dataStore.insertDevice(.heating(installationDate: .now), synced: false)
+        let thirdDevice = dataStore.insertDevice(.warmWater(), synced: true)
 
         //  WHEN
-        try? await dataStore.syncDevices([firstDevice, secondDevice])
+        try? await dataStore.syncDevices([firstDevice, secondDevice, thirdDevice])
 
         //  THEN
         let storedDevices = dataStore.getStoredDevices()

@@ -14,11 +14,18 @@ protocol DataClient {
 }
 
 extension DataClient {
-    func makeURL(endpoint: String) -> URL {
-        guard let url = URL(string: "https://comgy.io") else {
+    var baseURL: URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "comgy.io"
+        guard let url = components.url else {
             fatalError("Invalid URL!")
         }
-        return url.appendingPathComponent(endpoint)
+        return url
+    }
+
+    func makeURL(endpoint: String) -> URL {
+        baseURL.appendingPathComponent(endpoint)
     }
 
     func makeDecoder() -> JSONDecoder {

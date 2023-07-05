@@ -26,17 +26,23 @@ struct DeviceDetailsView: View {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .bottomBar) {
-                    Button(ctaButtonTitle, role: ctaButtonRole, action: ctaButtonAction)
-                    .buttonStyle(.borderedProminent)
+                if shouldShowCtaButton {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button(ctaButtonTitle, role: ctaButtonRole, action: ctaButtonAction)
+                            .buttonStyle(.borderedProminent)
+                    }
                 }
             }
             .confirmationDialog(confirmationTitle, isPresented: $isShowingConfirmation, titleVisibility: .visible) {
                 Button("Uninstall", role: .destructive, action: confirmedCtaButtonAction)
-                Button("Cancel", role: .cancel) { }
+                Button("Cancel", role: .cancel) {}
             }
             .navigationTitle(device.identifier)
         }
+    }
+
+    private var shouldShowCtaButton: Bool {
+        !(device.synced && device.isInstalled)
     }
 
     private var confirmationTitle: String {

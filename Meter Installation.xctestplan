@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "0DC48B75-471C-4AEB-A5E2-BCB7D341EA71",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Meter Installation.xcodeproj",
+      "identifier" : "14182FCB2863486A00427EF0",
+      "name" : "Meter Installation"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Meter Installation.xcodeproj",
+        "identifier" : "FAC1C9442A5568B700E487FA",
+        "name" : "Meter InstallationTests"
+      }
+    }
+  ],
+  "version" : 1
+}

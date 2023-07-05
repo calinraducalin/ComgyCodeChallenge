@@ -97,7 +97,7 @@ final class DeviceDataStoreTests: XCTestCase {
         ]
         let client = TestDataClient(response: response)
         let dataStore = DataStorage.test(client: client)
-        let device = dataStore.insertDevice(.coldWater(installationDate: .now), synced: false)
+        dataStore.insertDevice(.coldWater(installationDate: .now), synced: false)
 
         //  WHEN
         try? await dataStore.fetchDevices()
@@ -105,9 +105,7 @@ final class DeviceDataStoreTests: XCTestCase {
         //  THEN
         let storedDevices = dataStore.getStoredDevices()
         XCTAssertEqual(storedDevices.count, 1)
-
-        let storedDevice = storedDevices[0]
-        XCTAssertTrue(device.synced)
+        XCTAssertTrue(storedDevices[0].synced)
     }
 
     func testIgnoringInvalidDevicesWhenFetchingAll() async {

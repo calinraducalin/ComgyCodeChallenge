@@ -105,6 +105,7 @@
 		FAC1C9572A55A5A900E487FA /* DeviceManagementDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManagementDataStoreTests.swift; sourceTree = "<group>"; };
 		FAC1C95A2A55C52900E487FA /* DeviceSyncDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSyncDataStoreTests.swift; sourceTree = "<group>"; };
 		FAC1C95D2A55CA8500E487FA /* DeviceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModelTests.swift; sourceTree = "<group>"; };
+		FAD8D8212A56111500721DAD /* Meter Installation.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Meter Installation.xctestplan"; sourceTree = "<group>"; };
 		FAF99BBF2A55D5ED008AF2D5 /* SyncViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +130,7 @@
 		14182FC32863486900427EF0 = {
 			isa = PBXGroup;
 			children = (
+				FAD8D8212A56111500721DAD /* Meter Installation.xctestplan */,
 				829C51B42A449998003C8C9A /* README.md */,
 				14182FCE2863486A00427EF0 /* Meter Installation */,
 				FAC1C9462A5568B700E487FA /* Meter InstallationTests */,

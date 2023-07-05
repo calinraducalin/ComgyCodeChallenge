@@ -13,7 +13,6 @@ struct DeviceSectionView: View {
     let devices: [Device]
     let primaryAction: (_ device: Device) -> Void
 
-
     var body: some View {
         Group {
             if !devices.isEmpty {

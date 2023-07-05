@@ -10,6 +10,10 @@ import XCTest
 
 final class DeviceDataStoreTests: XCTestCase {
 
+    override func tearDown() async throws {
+        try DataStorage.test.resetAllData()
+    }
+
     func testImportingNewDevicesWhenFetchingAll() async {
         //  GIVEN
         let response: [DeviceResponse] = [

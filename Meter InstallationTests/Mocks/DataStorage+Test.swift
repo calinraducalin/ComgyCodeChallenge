@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 @testable import Meter_Installation
 
 extension DataStorage {

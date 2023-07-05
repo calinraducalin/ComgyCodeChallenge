@@ -11,6 +11,7 @@ enum MeterInstallationError: Error, Equatable {
     case network
     case missingData
     case batchInsert
+    case resetAllData
     case syncDevice
     case fetchDevices
     case unknown
@@ -31,6 +32,8 @@ extension MeterInstallationError: LocalizedError {
             return "An unknown error occured."
         case .syncDevice:
             return "An error occured while syncing the device."
+        case .resetAllData:
+            return "An error occured while resetting the data."
         }
     }
 }

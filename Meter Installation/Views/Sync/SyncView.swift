@@ -64,28 +64,28 @@ struct SyncView: View {
 
 struct SyncView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SyncViewModel(dataStore: DataStorage.preview)
+        let viewModel = SyncViewModel(dataStore: DataStorage.test)
 
-        let device0 = Device(context: DataStorage.preview.viewContext)
+        let device0 = Device(context: DataStorage.test.viewContext)
         device0.id = "WWM-0001-12"
         device0.installationDate = Date()
         device0.meterPointDescription = "Kitchen"
         device0.type = "warm_water"
         device0.synced = false
 
-        let device1 = Device(context: DataStorage.preview.viewContext)
+        let device1 = Device(context: DataStorage.test.viewContext)
         device1.id = "WWM-0001-13"
         device1.installationDate = Date()
         device1.meterPointDescription = "Hallway"
         device1.type = "cold_water"
         device1.synced = false
 
-        DataStorage.preview.viewContext.saveIfNeeded()
+        DataStorage.test.viewContext.saveIfNeeded()
 
         return NavigationStack {
             SyncView(viewModel: viewModel)
                 .environment(\.managedObjectContext,
-                              DataStorage.preview.viewContext)
+                              DataStorage.test.viewContext)
         }
 
     }

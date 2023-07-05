@@ -10,6 +10,10 @@ import XCTest
 
 final class DeviceManagementDataStoreTests: XCTestCase {
 
+    override func tearDown() async throws {
+        try DataStorage.test.resetAllData()
+    }
+
     func testMarkDeviceAsInstalled() {
         //  GIVEN
         let client = TestDataClient()
@@ -30,7 +34,7 @@ final class DeviceManagementDataStoreTests: XCTestCase {
         //  GIVEN
         let client = TestDataClient()
         let dataStore = DataStorage.test(client: client)
-        let device = dataStore.insertDevice(.coldWater(installationDate: .now), synced: false)
+        let device = dataStore.insertDevice(.heating(installationDate: .now), synced: false)
 
         //  WHEN
         dataStore.updateDevice(device, isInstalled: false)

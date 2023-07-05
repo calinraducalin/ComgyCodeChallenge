@@ -55,7 +55,7 @@ struct DeviceDetailsView: View {
 
 struct DeviceDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let device = Device(context: DataStorage.preview.viewContext)
+        let device = Device(context: DataStorage.test.viewContext)
         device.id = "WWM-0001-13"
         device.installationDate = Date()
         device.meterPointDescription = "Hallway"

@@ -28,11 +28,11 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let viewModel = MainViewModel(dataStore: DataStorage.preview)
+    static let viewModel = MainViewModel(dataStore: DataStorage.test)
 
     static var previews: some View {
         MainView(viewModel: viewModel)
             .environment(\.managedObjectContext,
-                          DataStorage.preview.viewContext)
+                          DataStorage.test.viewContext)
     }
 }

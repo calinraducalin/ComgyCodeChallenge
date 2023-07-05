@@ -18,7 +18,7 @@ extension DataStorage: DeviceDataStore {
         do {
             let decoder = client.makeDecoder()
             let devices = try decoder.decode([DeviceResponse].self, from: data)
-            logger.debug("Reveived devices: \(devices.count)")
+            logger?.debug("Reveived devices: \(devices.count)")
             try await importDevices(devices)
         } catch {
             throw MeterInstallationError.fetchDevices
@@ -48,8 +48,8 @@ private extension DataStorage {
 
         if validDevices.count != devices.count {
             let invalidDevices = devices.filter { !$0.isValid }
-            logger.debug("Ignorred invalid devices: \(invalidDevices)")
-            logger.debug("\(invalidDevices.description)")
+            logger?.debug("Ignorred invalid devices: \(invalidDevices)")
+            logger?.debug("\(invalidDevices.description)")
         }
 
         taskContext.saveIfNeeded()

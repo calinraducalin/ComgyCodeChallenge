@@ -8,6 +8,7 @@ I focused on delivering a quality product in respect to the platform guidelines,
 - search bar added in the main list allowing the user to filter the results
 - unistall a device if needed before it was synced with the server
 - swipe to install / uninstall a device as a shortcut
+- pull to refresh on devices and sync lists for easier access
 - showed a badge on the sync tab informing the users there are items needed for sync
 
 ## Code Implementation

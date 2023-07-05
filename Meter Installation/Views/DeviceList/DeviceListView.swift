@@ -31,13 +31,19 @@ struct DeviceListView: View {
                     }
                 }
             }
-            .navigationTitle("Devices")
             .refreshable {
                 await viewModel.updateDevices()
             }
             .task {
                 await viewModel.updateDevicesIfNeeded()
             }
+            .alert(
+                viewModel.currentErrorTitle,
+                isPresented: $viewModel.isShowingError,
+                actions: {},
+                message: { Text(viewModel.currentErrorMessage) }
+            )
+            .navigationTitle("Devices")
         }
         .searchable(text: $viewModel.searchText)
     }
@@ -56,10 +62,10 @@ struct DeviceListView_Previews: PreviewProvider {
 
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
-    let state: ListViewState
+    let state: ViewState
     let deleteAction: (_ device: Device) -> Void
 
-    init(filter: String, state: ListViewState, deleteAction: @escaping (_ device: Device) -> Void) {
+    init(filter: String, state: ViewState, deleteAction: @escaping (_ device: Device) -> Void) {
         _devices = FetchRequest<Device>(
             sortDescriptors: [SortDescriptor(\.id)],
             predicate: Self.makePredicate(filter: filter)
@@ -98,7 +104,7 @@ private struct FilteredListView: View {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [syncedPredicate, filterPredicate])
     }
 
-    private func makeEmptyViewTexts(state: ListViewState) -> (title: String, subtitle: String) {
+    private func makeEmptyViewTexts(state: ViewState) -> (title: String, subtitle: String) {
         let title: String
         let subtitle: String
         switch state {
@@ -108,7 +114,7 @@ private struct FilteredListView: View {
         case .loading:
             title = "Loading devices... 👀"
             subtitle = "Please wait until your items are shown."
-        case .failed:
+        case .failure:
             title = "Oups... 🙈"
             subtitle = "Something went wrong while loading your devices."
         }
@@ -117,7 +123,7 @@ private struct FilteredListView: View {
 }
 
 private struct ToolbarContentView: View {
-    let state: ListViewState
+    let state: ViewState
     let refreshAction: () -> Void
 
     var body: some View {

@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum ListViewState {
+enum ViewState: Equatable {
     case success
     case loading
-    case failed
+    case failure(_ error: MeterInstallationError)
 }

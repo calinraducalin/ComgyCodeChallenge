@@ -8,12 +8,13 @@
 import Foundation
 
 @MainActor
-final class DeviceListViewModel: ObservableObject {
+final class DeviceListViewModel: ObservableObject, ViewStateErrorHandler {
     typealias DevicesDataProviding = DeviceDataProviding & DeviceManagementDataProviding
 
     let dataProvider: DevicesDataProviding
-    @Published private(set) var state: ListViewState = .success
+    @Published private(set) var state: ViewState = .success
     @Published var searchText: String = ""
+    @Published var isShowingError = false
 
     private var lastUpdated: Date?
 
@@ -39,9 +40,9 @@ final class DeviceListViewModel: ObservableObject {
             lastUpdated = .now
             state = .success
         } catch {
-            let error = error as? MeterInstallationError ?? MeterInstallationError.unkownError(error)
-            print(error.localizedDescription)
-            state = .failed
+            let error = error as? MeterInstallationError ?? MeterInstallationError.unknown
+            state = .failure(error)
+            isShowingError = true
         }
     }
 

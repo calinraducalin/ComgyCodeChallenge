@@ -41,6 +41,12 @@ struct SyncView: View {
             .refreshable {
                 await viewModel.syncDevices(deviceList)
             }
+            .alert(
+                viewModel.currentErrorTitle,
+                isPresented: $viewModel.isShowingError,
+                actions: {},
+                message: { Text(viewModel.currentErrorMessage) }
+            )
             .navigationTitle("Sync")
         }
         .badge(devices.count)
@@ -86,7 +92,7 @@ struct SyncView_Previews: PreviewProvider {
 }
 
 private struct ToolbarContentView: View {
-    let state: ListViewState
+    let state: ViewState
     let devices: [Device]
     let syncAction: () -> Void
 

@@ -33,7 +33,7 @@ private extension DeviceSyncProviding {
             let data = try encoder.encode(device.makePatchInfo())
             try await client.patchData(data, to: syncURL)
         } catch {
-            throw MeterInstallationError.wrongDataFormat(error: error)
+            throw MeterInstallationError.syncDevice
         }
     }
 }

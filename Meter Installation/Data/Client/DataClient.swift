@@ -32,7 +32,7 @@ private extension URLSession {
         let validStatus = 200...299
         guard let (data, response) = try await self.data(for: request) as? (Data, HTTPURLResponse),
               validStatus.contains(response.statusCode) else {
-            throw MeterInstallationError.networkError
+            throw MeterInstallationError.network
         }
 
         return data

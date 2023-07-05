@@ -7,27 +7,30 @@
 
 import Foundation
 
-enum MeterInstallationError: Error {
-    case networkError
+enum MeterInstallationError: Error, Equatable {
+    case network
     case missingData
-    case batchInsertError
-    case wrongDataFormat(error: Error)
-    case unkownError(_ error: Error)
+    case batchInsert
+    case syncDevice
+    case fetchDevices
+    case unknown
 }
 
 extension MeterInstallationError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .networkError:
+        case .network:
             return "A network error occured."
-        case .batchInsertError:
+        case .batchInsert:
             return "Batch insert error occured."
         case .missingData:
-            return "Missing data"
-        case let .wrongDataFormat(error):
-            return "Wrong Data format error: \(error.localizedDescription)"
-        case let .unkownError(error):
-            return "An unknown error occured: \(error.localizedDescription)"
+            return "Missing data."
+        case .fetchDevices:
+            return "An error occured while loading the devices."
+        case .unknown:
+            return "An unknown error occured."
+        case .syncDevice:
+            return "An error occured while syncing the device."
         }
     }
 }

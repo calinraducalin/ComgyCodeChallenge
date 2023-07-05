@@ -8,10 +8,11 @@
 import Foundation
 
 @MainActor
-final class SyncViewModel: ObservableObject {
+final class SyncViewModel: ObservableObject, ViewStateErrorHandler {
     typealias DeviceSyncManaging = DeviceManagementDataProviding & DeviceSyncProviding
     let dataProvider: DeviceSyncManaging
-    @Published private(set) var state: ListViewState = .success
+    @Published private(set) var state: ViewState = .success
+    @Published var isShowingError = false
     
     init(dataProvider: DeviceSyncManaging = DataProvider.shared) {
         self.dataProvider = dataProvider
@@ -29,9 +30,9 @@ final class SyncViewModel: ObservableObject {
             dataProvider.markAsSyncedDevices(devices)
             state = .success
         } catch {
-            let error: MeterInstallationError = error as? MeterInstallationError ?? .unkownError(error)
-            print(error.localizedDescription)
-            state = .failed
+            let error: MeterInstallationError = error as? MeterInstallationError ?? .unknown
+            state = .failure(error)
+            isShowingError = true
         }
     }
 }

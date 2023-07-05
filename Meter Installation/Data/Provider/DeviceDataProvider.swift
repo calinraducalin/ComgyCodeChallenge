@@ -21,7 +21,7 @@ extension DataProvider: DeviceDataProviding {
             logger.debug("Reveived devices: \(devices.count)")
             try await importDevices(devices)
         } catch {
-            throw MeterInstallationError.wrongDataFormat(error: error)
+            throw MeterInstallationError.fetchDevices
         }
     }
 }

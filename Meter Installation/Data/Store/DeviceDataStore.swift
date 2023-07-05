@@ -42,6 +42,7 @@ private extension DataStorage {
             // update installation date only if needed
             if device.synced || !device.synced && remoteDevice.installationDate != nil {
                 device.installationDate = remoteDevice.installationDate
+                device.synced = true
             }
         }
 

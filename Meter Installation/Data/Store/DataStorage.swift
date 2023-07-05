@@ -21,7 +21,7 @@ final class DataStorage: DataStore {
     static let shared = DataStorage()
 
     let client: DataClient
-    var logger: Logger { AppLogger.data }
+    let logger = AppLogger.data
     private let inMemory: Bool
 
     lazy private var container: NSPersistentContainer = {
@@ -76,5 +76,9 @@ final class DataStorage: DataStore {
 
 extension DataStorage {
     static let preview = DataStorage(inMemory: true, client: PreviewClient())
+
+    static func test(client: DataClient) -> DataStorage {
+        return DataStorage(inMemory: true, client: client)
+    }
 }
 

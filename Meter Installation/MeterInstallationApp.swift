@@ -13,9 +13,19 @@ struct MeterInstallationApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environment(\.managedObjectContext, DataStorage.shared.viewContext)
+            if isRunningUnitTests {
+                ProgressView {
+                    Text("🤞 Running unit tests...")
+                }
+            } else {
+                MainView()
+                    .environment(\.managedObjectContext, DataStorage.shared.viewContext)
+            }
         }
     }
-    
+
+    private var isRunningUnitTests: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
 }
+

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct DeviceSectionView: View {
     @State private var selectedDevice: Device?
     let title: String

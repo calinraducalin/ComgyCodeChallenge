@@ -8,10 +8,7 @@
 import CoreData
 
 final class PreviewClient: DataClient {
-    func getData(from url: URL) async throws -> Data {
-//        try await Task.sleep(nanoseconds: UInt64.random(in: 100_000_000...500_000_000))
-        return previewDevicesData
-    }
+    func getData(from url: URL) async throws -> Data { previewDevicesData }
     func patchData(_ data: Data, to: URL) async throws -> Data { Data() }
 }
 

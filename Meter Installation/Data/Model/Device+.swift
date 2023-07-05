@@ -24,7 +24,7 @@ extension Device {
     class func entity(with id: String, in context: NSManagedObjectContext) -> Device {
         let entity: Device
         let predicate = PredicateMaker.makeIDPredicate(id: id)
-        if let existingEntity = findFirst(predicate: predicate, in: context) {
+        if let existingEntity: Device = context.findFirst(predicate: predicate) {
             entity = existingEntity
         } else {
             entity = Device(context: context)
@@ -35,7 +35,7 @@ extension Device {
 
     class func findFirst(with id: String, in context: NSManagedObjectContext) -> Self? {
         let predicate = PredicateMaker.makeIDPredicate(id: id)
-        return findFirst(predicate: predicate, in: context)
+        return context.findFirst(predicate: predicate)
     }
 
     func entity(in context: NSManagedObjectContext) -> Self {

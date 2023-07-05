@@ -31,9 +31,10 @@ struct DeviceSectionView: View {
             }
         }
         .sheet(item: $selectedDevice) { device in
-            DeviceDetailsView(device: device) {
+            let viewModel = DeviceDetailsViewModel(device: device) {
                 primaryAction(device)
             }
+            DeviceDetailsView(viewModel: viewModel)
         }
     }
 }

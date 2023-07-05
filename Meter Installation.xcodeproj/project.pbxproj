@@ -39,6 +39,7 @@
 		FA70E54F2A54580E00621DF4 /* DeviceSyncProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */; };
 		FA70E5522A545FDE00621DF4 /* DevicePatchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E5512A545FDE00621DF4 /* DevicePatchInfo.swift */; };
 		FAC1C93E2A554C0E00E487FA /* ViewStateErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C93D2A554C0E00E487FA /* ViewStateErrorHandler.swift */; };
+		FAC1C9402A55609F00E487FA /* DeviceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1C93F2A55609F00E487FA /* DeviceDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		FA70E54E2A54580E00621DF4 /* DeviceSyncProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSyncProvider.swift; sourceTree = "<group>"; };
 		FA70E5512A545FDE00621DF4 /* DevicePatchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePatchInfo.swift; sourceTree = "<group>"; };
 		FAC1C93D2A554C0E00E487FA /* ViewStateErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateErrorHandler.swift; sourceTree = "<group>"; };
+		FAC1C93F2A55609F00E487FA /* DeviceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				FA70E54C2A54393100621DF4 /* DeviceDetailsView.swift */,
+				FAC1C93F2A55609F00E487FA /* DeviceDetailsViewModel.swift */,
 			);
 			path = DeviceDetails;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				FA70E5442A54040B00621DF4 /* EmptyView.swift in Sources */,
 				FA70E5302A533B5600621DF4 /* Device+.swift in Sources */,
 				825A81D02A41BCBE0031BD66 /* MainView.swift in Sources */,
+				FAC1C9402A55609F00E487FA /* DeviceDetailsViewModel.swift in Sources */,
 				FA70E52B2A530D0C00621DF4 /* DeviceResponse.swift in Sources */,
 				FA70E54A2A54258B00621DF4 /* NSManageObject+.swift in Sources */,
 				825A81CD2A407EF50031BD66 /* MeterInstallationApp.swift in Sources */,

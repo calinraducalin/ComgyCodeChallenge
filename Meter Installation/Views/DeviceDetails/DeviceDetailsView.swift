@@ -9,16 +9,18 @@ import SwiftUI
 
 struct DeviceDetailsView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var isShowingConfirmation = false
-    let device: Device
-    let primaryAction: () -> Void
+    @StateObject var viewModel: DeviceDetailsViewModel
+
+    init(viewModel: DeviceDetailsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationStack {
             List {
-                DeviceRowView(text: "Identifier", detailsText: device.identifier)
-                DeviceRowView(text: "Type", detailsText: device.deviceType.description)
-                DeviceRowView(text: "Meter Point", detailsText: device.meterPointText)
+                DeviceRowView(text: "Identifier", detailsText: viewModel.device.identifier)
+                DeviceRowView(text: "Type", detailsText: viewModel.device.deviceType.description)
+                DeviceRowView(text: "Meter Point", detailsText: viewModel.device.meterPointText)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -26,46 +28,28 @@ struct DeviceDetailsView: View {
                         dismiss()
                     }
                 }
-                if shouldShowCtaButton {
+                if viewModel.shouldShowCtaButton {
                     ToolbarItem(placement: .bottomBar) {
-                        Button(ctaButtonTitle, role: ctaButtonRole, action: ctaButtonAction)
-                            .buttonStyle(.borderedProminent)
+                        Button(viewModel.ctaButtonTitle, role: viewModel.ctaButtonRole) {
+                            viewModel.ctaButtonAction()
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
                 }
             }
-            .confirmationDialog(confirmationTitle, isPresented: $isShowingConfirmation, titleVisibility: .visible) {
-                Button("Uninstall", role: .destructive, action: confirmedCtaButtonAction)
+            .confirmationDialog(viewModel.confirmationTitle, isPresented: $viewModel.isShowingConfirmation, titleVisibility: .visible) {
+                Button("Uninstall", role: .destructive) {
+                    viewModel.confirmedCtaButtonAction()
+                }
                 Button("Cancel", role: .cancel) {}
             }
-            .navigationTitle(device.identifier)
+            .onChange(of: viewModel.shouldDismiss) { shouldDismiss in
+                if shouldDismiss {
+                    dismiss()
+                }
+            }
+            .navigationTitle(viewModel.device.identifier)
         }
-    }
-
-    private var shouldShowCtaButton: Bool {
-        !(device.synced && device.isInstalled)
-    }
-
-    private var confirmationTitle: String {
-        "Unsintall \(device.identifier)"
-    }
-
-    private var ctaButtonTitle: String { device.isInstalled ? "Uninstall" : "Install" }
-
-    private var ctaButtonRole: ButtonRole? {
-        device.isInstalled ? .destructive : .none
-    }
-
-    private func ctaButtonAction() {
-        if device.isInstalled {
-            isShowingConfirmation = true
-        } else {
-            confirmedCtaButtonAction()
-        }
-    }
-
-    private func confirmedCtaButtonAction() {
-        primaryAction()
-        dismiss()
     }
 }
 
@@ -77,7 +61,8 @@ struct DeviceDetailsView_Previews: PreviewProvider {
         device.meterPointDescription = "Hallway"
         device.type = "cold_water"
 
-        return DeviceDetailsView(device: device) { }
+        let viewModel = DeviceDetailsViewModel(device: device) {}
+        return DeviceDetailsView(viewModel: viewModel)
     }
 }
 

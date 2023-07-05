@@ -10,19 +10,23 @@ import SwiftUI
 
 struct DeviceListView: View {
     @StateObject var viewModel = DeviceListViewModel()
-    
+
     var body: some View {
         NavigationStack {
             Group {
                 FilteredListView(
                     filter: viewModel.searchText,
                     state: viewModel.state,
+                    selectedDevice: $viewModel.selectedDevice,
                     deleteAction: { device in
                         withAnimation {
                             viewModel.installDevice(device)
                         }
                     }
                 )
+            }
+            .refreshable {
+                await viewModel.updateDevices()
             }
             .toolbar {
                 ToolbarContentView(state: viewModel.state) {
@@ -40,6 +44,12 @@ struct DeviceListView: View {
                 actions: {},
                 message: { Text(viewModel.currentErrorMessage) }
             )
+            .sheet(item: $viewModel.selectedDevice) { device in
+                let viewModel = DeviceDetailsViewModel(device: device) {
+                    self.viewModel.installDevice(device)
+                }
+                DeviceDetailsView(viewModel: viewModel)
+            }
             .navigationTitle("Devices")
         }
         .searchable(text: $viewModel.searchText)
@@ -59,17 +69,18 @@ struct DeviceListView_Previews: PreviewProvider {
 
 private struct FilteredListView: View {
     @FetchRequest var devices: FetchedResults<Device>
-    @State private var selectedDevice: Device?
+    @Binding var selectedDevice: Device?
     let state: ViewState
     let deleteAction: (_ device: Device) -> Void
 
-    init(filter: String, state: ViewState, deleteAction: @escaping (_ device: Device) -> Void) {
+    init(filter: String, state: ViewState, selectedDevice: Binding<Device?>, deleteAction: @escaping (_ device: Device) -> Void) {
         _devices = FetchRequest<Device>(
             sortDescriptors: [SortDescriptor(\.id)],
             predicate: Self.makePredicate(filter: filter)
         )
         self.state = state
         self.deleteAction = deleteAction
+        _selectedDevice = selectedDevice
     }
 
     var body: some View {
@@ -94,12 +105,6 @@ private struct FilteredListView: View {
                 }
                 .listStyle(.sidebar)
             }
-        }
-        .sheet(item: $selectedDevice) { device in
-            let viewModel = DeviceDetailsViewModel(device: device) {
-                deleteAction(device)
-            }
-            DeviceDetailsView(viewModel: viewModel)
         }
     }
 
@@ -141,16 +146,11 @@ private struct ToolbarContentView: View {
     let refreshAction: () -> Void
 
     var body: some View {
-        Button(action: refreshAction) {
-            if state == .loading {
-                HStack(spacing: 8) {
-                    Text("Refreshing...")
-                    ProgressView()
-                }
-            } else {
-                Text("Refresh")
-            }
+        HStack {
+            Button(title, action: refreshAction)
+                .disabled(state == .loading)
         }
-        .disabled(state == .loading)
     }
+
+    private var title: String { state == .loading ? "Refreshing..." : "Refresh" }
 }

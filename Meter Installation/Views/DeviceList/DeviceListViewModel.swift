@@ -15,6 +15,7 @@ final class DeviceListViewModel: ObservableObject, ViewStateErrorHandler {
     @Published private(set) var state: ViewState = .success
     @Published var searchText: String = ""
     @Published var isShowingError = false
+    @Published var selectedDevice: Device?
 
     private var lastUpdated: Date?
 

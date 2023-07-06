@@ -5,6 +5,7 @@ Hi 👋.
 Meter Installation is a demo app entirely implemented using SwiftUI. It can be run on all iOS and ipadOS devices with a minimum version 16.
 
 I focused on delivering a quality product in respect to the platform guidelines, supportting all the required features. I added a few extra features that I found helpful:
+- split the device list into uninstalled and installed collapsable sections
 - search bar added in the main list allowing the user to filter the results
 - unistall a device if needed before it was synced with the server
 - swipe to install / uninstall a device as a shortcut

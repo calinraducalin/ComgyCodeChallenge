@@ -108,9 +108,13 @@ private struct FilteredListView: View {
         }
     }
 
-    private var installedDevices: [Device] { devices.filter{ $0.isInstalled }}
+    private var installedDevices: [Device] {
+        devices.filter { $0.isInstalled }
+    }
 
-    private var uninstalledDevices: [Device] { devices.filter{ !$0.isInstalled }}
+    private var uninstalledDevices: [Device] {
+        devices.filter { !$0.isInstalled }
+    }
 
     private static func makePredicate(filter: String) -> NSPredicate {
         let syncedPredicate = PredicateMaker.makeSyncedPredicate(synced: true)

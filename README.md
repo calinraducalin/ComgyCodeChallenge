@@ -2,7 +2,7 @@
 
 Hi 👋.
 
-Meter Installation is a universal app entirely implemented using SwiftUI. It requires minumum iOS 16 or macOS 13.
+Meter Installation is a universal app implemented using SwiftUI, available on iPhone, iPad and Mac. It requires minumum iOS/ipadOS 16 or macOS 13.
 
 I focused on delivering a quality product in respect to the platform guidelines, supportting all the required features. I added a few extra features that I found helpful:
 - split the device list into uninstalled and installed collapsable sections

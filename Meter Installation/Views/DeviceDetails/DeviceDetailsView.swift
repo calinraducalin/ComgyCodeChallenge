@@ -22,14 +22,15 @@ struct DeviceDetailsView: View {
                 DeviceRowView(text: "Type", detailsText: viewModel.device.deviceType.description)
                 DeviceRowView(text: "Meter Point", detailsText: viewModel.device.meterPointText)
             }
+            .frame(minWidth: 400, minHeight: 200)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Close") {
                         dismiss()
                     }
                 }
                 if viewModel.shouldShowCtaButton {
-                    ToolbarItem(placement: .bottomBar) {
+                    ToolbarItem(placement: ctaButtonPlacement) {
                         Button(viewModel.ctaButtonTitle, role: viewModel.ctaButtonRole) {
                             viewModel.ctaButtonAction()
                         }
@@ -50,6 +51,14 @@ struct DeviceDetailsView: View {
             }
             .navigationTitle(viewModel.device.identifier)
         }
+    }
+
+    var ctaButtonPlacement: ToolbarItemPlacement {
+        #if os(macOS)
+        return .confirmationAction
+        #else
+        return .bottomBar
+        #endif
     }
 }
 

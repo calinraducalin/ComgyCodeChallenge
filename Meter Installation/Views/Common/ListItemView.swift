@@ -16,7 +16,7 @@ struct ListItemView: View {
             Image(systemName: device.deviceType.systemImageName)
                 .renderingMode(.template)
                 .foregroundColor(device.deviceType.imageColor)
-            VStack(alignment: .leading) {
+            AdaptiveStack(horizontalAlignment: .leading) {
                 Text(device.identifier)
                     .font(.title3)
                 Text(device.meterPointText)
@@ -65,3 +65,26 @@ struct ListItemView_Previews: PreviewProvider {
         return ListItemView(device: device) { _ in }
     }
 }
+
+private struct AdaptiveStack<Content: View>: View {
+    let horizontalAlignment: HorizontalAlignment
+    let verticalAlignment: VerticalAlignment
+    let spacing: CGFloat?
+    let content: () -> Content
+
+    init(horizontalAlignment: HorizontalAlignment = .center, verticalAlignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> Content) {
+        self.horizontalAlignment = horizontalAlignment
+        self.verticalAlignment = verticalAlignment
+        self.spacing = spacing
+        self.content = content
+    }
+
+    var body: some View {
+        #if os(macOS)
+        HStack(alignment: verticalAlignment, spacing: spacing, content: content)
+        #else
+        VStack(alignment: horizontalAlignment, spacing: spacing, content: content)
+        #endif
+    }
+}
+
